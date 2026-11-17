@@ -1,3 +1,1952 @@
+Last login: Mon Nov 16 23:54:20 on ttys000
+rhyswilliams@Rhyss-MacBook ~ % cd /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7 
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v7 % ./build-ipa.sh
+
+== 1/6  fetching sources (neoLegacy + 4JLibs, ~700 MB on first run)
++ bash scripts/fetch-submodules.sh
+found 4 submodule(s) in .gitmodules
+fetching sources with plain git clones
+clone https://git.neolegacy.dev/neoStudiosLCE/neoLegacy.git -> upstream
+Cloning into 'upstream'...
+remote: Enumerating objects: 20075, done.
+remote: Counting objects: 100% (20075/20075), done.
+remote: Compressing objects: 100% (14245/14245), done.
+Receiving objects: 100% (20075/20075), 1.10 GiB | 5.13 MiB/s, done.
+remote: Total 20075 (delta 6028), reused 17619 (delta 5540), pack-reused 0 (from 0)
+Resolving deltas: 100% (6028/6028), done.
+Updating files: 100% (21187/21187), done.
+clone https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git -> third_party/4JLibs
+  removing incomplete third_party/4JLibs
+Cloning into 'third_party/4JLibs'...
+remote: Enumerating objects: 200, done.
+remote: Counting objects: 100% (200/200), done.
+remote: Compressing objects: 100% (185/185), done.
+remote: Total 200 (delta 25), reused 140 (delta 12), pack-reused 0 (from 0)
+Receiving objects: 100% (200/200), 3.50 MiB | 6.95 MiB/s, done.
+Resolving deltas: 100% (25/25), done.
+clone https://github.com/marmalade/gameswf.git -> third_party/gameswf
+  removing incomplete third_party/gameswf
+Cloning into 'third_party/gameswf'...
+remote: Enumerating objects: 325, done.
+remote: Counting objects: 100% (325/325), done.
+remote: Compressing objects: 100% (296/296), done.
+remote: Total 325 (delta 27), reused 322 (delta 27), pack-reused 0 (from 0)
+Receiving objects: 100% (325/325), 967.75 KiB | 6.28 MiB/s, done.
+Resolving deltas: 100% (27/27), done.
+clone https://github.com/KhronosGroup/SPIRV-Cross.git -> third_party/spirv-cross
+  removing incomplete third_party/spirv-cross
+Cloning into 'third_party/spirv-cross'...
+remote: Enumerating objects: 4223, done.
+remote: Counting objects: 100% (4223/4223), done.
+remote: Compressing objects: 100% (2784/2784), done.
+remote: Total 4223 (delta 1906), reused 2793 (delta 1413), pack-reused 0 (from 0)
+Receiving objects: 100% (4223/4223), 2.17 MiB | 4.12 MiB/s, done.
+Resolving deltas: 100% (1906/1906), done.
+fetching neoLegacy's nested 4JLibs
+Submodule 'Minecraft.Client/Windows64/4JLibs' (https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git) registered for path 'Minecraft.Client/Windows64/4JLibs'
+Cloning into '/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Windows64/4JLibs'...
+remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Enumerating objects: 29, done.
+remote: Counting objects: 100% (29/29), done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 11), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (15/15), 5.14 KiB | 219.00 KiB/s, done.
+From https://git.neolegacy.dev/neoStudiosLCE/4JLibs
+ * branch            82eeded18e2afb51771098cefbb45209a5a2f5ec -> FETCH_HEAD
+Submodule path 'Minecraft.Client/Windows64/4JLibs': checked out '82eeded18e2afb51771098cefbb45209a5a2f5ec'
+sources ready
+
+== 2/6  patching upstream for iOS
++ bash scripts/apply-patches.sh
+patches: 91 applied, 2 not applicable, 0 failed
++ bash scripts/patch-upstream-stdafx.sh
+patch-upstream-stdafx: wrapped stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: wrapped Minecraft.Client/stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: skipped ItemInstance include on iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ArrayWithLength.h
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/DataOutputStream.cpp
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/DataInputStream.cpp
+patch-upstream-stdafx: routed iOS to zlib branches in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/compression.cpp
+patch-upstream-stdafx: added Level::DEPTH to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Level.h
+patch-upstream-stdafx: rewrote lc->unsaved as setUnsaved(false) in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/FileHeader.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/StringHelpers.cpp
+patch-upstream-stdafx: inserted ChunkSource.h include into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LevelData.cpp
+patch-upstream-stdafx: routed iOS through Durango branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/DirectoryLevelStorage.cpp
+patch-upstream-stdafx: forward-declared DispenserTileEntity in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/WeighedTreasure.h
+patch-upstream-stdafx: added Biome.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/FlatGeneratorInfo.cpp
+patch-upstream-stdafx: added Entity.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/EntitySelector.cpp
+patch-upstream-stdafx: added SavedData headers to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/SavedDataStorage.cpp
+patch-upstream-stdafx: added compression.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/GameRules/ConsoleSchematicFile.h
+patch-upstream-stdafx: renamed hellSand_Id -> soulsand_Id in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/NetherStalkTile.cpp
+patch-upstream-stdafx: added ClothTile.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ClothTileItem.cpp
+patch-upstream-stdafx: rewrote lc->blocks= as setBlockData() in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: added nullptr arg to finalizeMobSpawn in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/MonsterPlacerItem.cpp
+patch-upstream-stdafx: Ocelot.h has no getMaxHealth override, skipping
+patch-upstream-stdafx: Ocelot.cpp has no getMaxHealth definition, skipping
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load signature
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load body
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/SpringTile.cpp
+patch-upstream-stdafx: added handleRidePacket virtual to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/PacketListener.h
+patch-upstream-stdafx: added handleRidePacket body to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/PacketListener.cpp
+patch-upstream-stdafx: gated UIVec2D in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: renamed CLICKED_OUTSIDE -> SLOT_CLICKED_OUTSIDE in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/AbstractContainerScreen.cpp
+patch-upstream-stdafx: rewrote SetFilePointer nullptr->FILE_BEGIN in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ZoneIo.cpp
+patch-upstream-stdafx: added Ocelot.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/OcelotModel.cpp
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/GameMode.cpp
+patch-upstream-stdafx: gated ConnectionProgressParams in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated CustomDrawData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated SoundEngine.h
+patch-upstream-stdafx: rewrote FileEntrySaveData read for iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added SoundTypes.h include to IUIController.h
+patch-upstream-stdafx: added GameMode subclass includes to Minecraft.cpp
+patch-upstream-stdafx: gated PostProcesser.h body for iOS
+grep: parentheses not balanced
+patch-upstream-stdafx: added wchar_t overload for convStringToWstring
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added glLight fwd decl to Lighting.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Minecraft.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+patch-getskycolor-checkpoints: stub (logs no longer needed)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Textures.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TextureManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/StitchedTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/CompassTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ClockTexture.cpp
+already patched
+already patched
+patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/PreStitchedTextureMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TextureMap.cpp
+already patched
+Texture.cpp already patched
+TextureManager.cpp already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/CompressedTileStorage.cpp
+already patched
+already patched
+already patched
+already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Gui.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Tesselator.cpp
+not applicable (normal() already uses int8_t): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Tesselator.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Colours/ColourTable.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/TallGrass.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/EntityTracker.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Chunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Region.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: Minecraft.World/StructureStart.h
+already patched: Minecraft.Client/Common/GameRules/GameRuleDefinition.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/CompassItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ClockItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/SoundEngine.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_IngameTooltips.inc (1194 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_DefineActions.inc (135 mappings)
+gen-html-format: CMinecraftApp::FormatChatMessage is gone from upstream, emitting a fallback
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_FormatHTML.inc (8 functions)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_HowToPlay.inc (38 labels)
+gen-chat-handler: mapped EscapeHTMLString, FormatColoredString, getEntityName, SetGlobalXuiAction
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_HandleChat.inc
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_PrivilegeChanges.inc
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/PlayerList.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_AbstractContainerMenu.inc (1726 lines)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad] != nullptr' (upstream had 2)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad]->getTutorial()' (upstream had 2)
+gen-crafting-menu: 2x banner craft call made a no-op (no connection on iOS)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_CraftingMenu.inc (2171 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_CreativeMenu.inc (1601 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_AnvilMenu.inc (262 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_BeaconMenu.inc (400 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_TradingMenu.inc (375 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/DLC/DLCManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/DLC/DLCSkinFile.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_SkinSelectMenu.inc (2009 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_CreditDefs.inc (502 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/TexturePackRepository.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/AbstractTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/DLCTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/File.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ConsoleSaveFileOriginal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ConsoleSaveFileOriginal.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/WitchRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/WitchModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/EnderDragonRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/EnderCrystalRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/DragonModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LivingEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerLevel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LightningBolt.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/FireworksRocketEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/EnderDragon.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/BaseMobSpawner.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/MinecraftServer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/OldChunkStorage.cpp
+not applicable (findSeed has no progress renderer): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/BiomeSource.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/GameRules/GameRuleManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/compression.h
+gen-tutorial: ChoiceTask::isCompleted returns on every path upstream
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/iOS_Tutorial.inc (2719 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Tutorial/ControllerTask.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/PlayerList.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/GameRules/CollectItemRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/GameRules/CompleteAllRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/LivingEntity.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/MapItemSavedData.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/DyePowderItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Mob.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/BreedGoal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Inventory.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/MapItemSavedData.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Entity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Minecart.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/PortalTile.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.World/ThrownEnderpearl.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/upstream/Minecraft.Client/ItemInHandRenderer.cpp
++ bash scripts/patch-gameswf.sh
+gameswf patch: scanned 298 files, updated 8
++ python3 scripts/make-app-icon.py
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/Minecraft.Client/iOS/Resources/AppIcon60x60@2x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/Minecraft.Client/iOS/Resources/AppIcon60x60@3x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/Minecraft.Client/iOS/Resources/AppIcon76x76@2x~ipad.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/Minecraft.Client/iOS/Resources/AppIcon83.5x83.5@2x~ipad.png
+
+== 3/6  building ruffle_ios for arm64 (first run compiles a lot of crates)
++ cargo build --release --target aarch64-apple-ios
+    Updating crates.io index
+    Updating git repository `https://github.com/dtentiion/ruffle`
+    Updating git repository `https://github.com/kyren/gc-arena.git`
+    Updating git repository `https://github.com/ruffle-rs/regras3`
+    Updating git repository `https://github.com/ruffle-rs/rust-flash-lso`
+    Updating git repository `https://github.com/ruffle-rs/h263-rs`
+     Locking 348 packages to latest compatible versions
+      Adding pollster v0.4.0 (available: v1.0.2)
+      Adding wgpu v27.0.1 (available: v30.0.2)
+  Downloaded bitflags v2.13.2
+  Downloaded block v0.1.6
+  Downloaded equivalent v1.0.3
+  Downloaded clap_lex v1.1.2
+  Downloaded futures-task v0.3.34
+  Downloaded cfg_aliases v0.2.2
+  Downloaded bit-set v0.8.0
+  Downloaded crc v3.4.0
+  Downloaded enum-map-derive v0.17.0
+  Downloaded futures-sink v0.3.34
+  Downloaded intl_pluralrules v7.0.2
+  Downloaded cfg-if v1.0.5
+  Downloaded itoa v1.0.19
+  Downloaded event-listener-strategy v0.5.4
+  Downloaded lyon v1.0.19
+  Downloaded color_quant v1.1.0
+  Downloaded hexf-parse v0.2.1
+  Downloaded gpu-descriptor v0.3.2
+  Downloaded gpu-descriptor-types v0.2.0
+  Downloaded float_next_after v1.0.0
+  Downloaded futures-io v0.3.34
+  Downloaded intl-memoizer v0.5.3
+  Downloaded foreign-types-macros v0.2.4
+  Downloaded lazy_static v1.5.1
+  Downloaded malloc_buf v0.0.6
+  Downloaded multiversion_no_op v1.0.0
+  Downloaded pollster v0.4.0
+  Downloaded potential_utf v0.1.6
+  Downloaded powerfmt v0.2.1
+  Downloaded futures-core v0.3.34
+  Downloaded futures-macro v0.3.34
+  Downloaded gpu-alloc-types v0.3.1
+  Downloaded async-channel v2.5.0
+  Downloaded bytemuck_derive v1.12.1
+  Downloaded concurrent-queue v2.5.0
+  Downloaded crc-catalog v2.5.0
+  Downloaded crossbeam-deque v0.8.8
+  Downloaded displaydoc v0.2.7
+  Downloaded either v1.19.0
+  Downloaded enumset v1.1.15
+  Downloaded enumset_derive v0.15.1
+  Downloaded fluent-template-macros v0.13.3
+  Downloaded lzma-rs v0.3.0
+  Downloaded bit-vec v0.8.0
+  Downloaded globset v0.4.21
+  Downloaded deranged v0.5.9
+  Downloaded fluent-langneg v0.13.1
+  Downloaded fluent-syntax v0.12.0
+  Downloaded gpu-alloc v0.6.2
+  Downloaded khronos-egl v6.0.0
+  Downloaded libloading v0.8.9
+  Downloaded crossbeam-epoch v0.9.21
+  Downloaded event-listener v5.4.2
+  Downloaded lru v0.16.4
+  Downloaded enum-map v2.7.3
+  Downloaded convert_case v0.11.0
+  Downloaded gif v0.14.2
+  Downloaded chardetng v0.1.17
+  Downloaded anyhow v1.0.104
+  Downloaded fax v0.2.7
+  Downloaded fluent-bundle v0.16.0
+  Downloaded clap_derive v4.6.8
+  Downloaded lyon_path v1.0.19
+  Downloaded primal-check v0.3.4
+  Downloaded lyon_algorithms v1.0.22
+  Downloaded litrs v1.0.1
+  Downloaded futures-executor v0.3.34
+  Downloaded litemap v0.8.3
+  Downloaded fluent-templates v0.13.3
+  Downloaded type-map v0.5.1
+  Downloaded unic-langid-macros v0.9.6
+  Downloaded arrayvec v0.7.8
+  Downloaded codespan-reporting v0.12.0
+  Downloaded rustc-hash v1.1.0
+  Downloaded crossbeam-utils v0.8.23
+  Downloaded futures-channel v0.3.34
+  Downloaded bytemuck v1.25.2
+  Downloaded crc32fast v1.5.5
+  Downloaded futures v0.3.34
+  Downloaded lyon_geom v1.0.20
+  Downloaded half v2.7.1
+  Downloaded log v0.4.35
+  Downloaded bitstream-io v4.10.0
+  Downloaded utf8_iter v1.1.0
+  Downloaded icu_locale_core v2.4.0
+  Downloaded icu_normalizer_data v2.4.0
+  Downloaded flume v0.11.1
+  Downloaded clap v4.6.8
+  Downloaded rustc-hash v2.1.3
+  Downloaded icu_provider v2.4.0
+  Downloaded ignore v0.4.34
+  Downloaded euclid v0.22.14
+  Downloaded wgpu-core-deps-apple v27.0.0
+  Downloaded flate2 v1.1.11
+  Downloaded pkg-config v0.3.34
+  Downloaded icu_collections v2.4.0
+  Downloaded indexmap v2.14.2
+  Downloaded renderdoc-sys v1.1.0
+  Downloaded icu_properties v2.4.0
+  Downloaded aho-corasick v1.1.5
+  Downloaded quick-error v2.0.1
+  Downloaded time-core v0.1.9
+  Downloaded itertools v0.14.0
+  Downloaded glow v0.16.0
+  Downloaded clap_builder v4.6.7
+  Downloaded icu_properties_data v2.4.0
+  Downloaded futures-util v0.3.34
+  Downloaded lyon_tessellation v1.0.23
+  Downloaded unic-langid v0.9.6
+  Downloaded zerofrom-derive v0.1.8
+  Downloaded image v0.25.10
+  Downloaded bstr v1.13.1
+  Downloaded transpose v0.2.3
+  Downloaded ash v0.38.0+1.3.281
+  Downloaded unic-langid-macros-impl v0.9.6
+  Downloaded encoding_rs v0.8.44
+  Downloaded thread_local v1.1.10
+  Downloaded icu_normalizer v2.4.0
+  Downloaded id3 v1.17.3
+  Downloaded jpeg-decoder v0.3.2
+  Downloaded libc v0.2.191
+  Downloaded objc v0.2.7
+  Downloaded quote v1.0.47
+  Downloaded simdutf8 v0.1.5
+  Downloaded profiling v1.0.18
+  Downloaded weak-table v0.3.2
+  Downloaded ordered-float v5.5.1
+  Downloaded realfft v3.5.1
+  Downloaded strength_reduce v0.2.4
+  Downloaded simd-adler32 v0.3.10
+  Downloaded num-integer v0.1.47
+  Downloaded thiserror v2.0.21
+  Downloaded utf_types v1.0.0
+  Downloaded termcolor v1.4.1
+  Downloaded thiserror-impl v2.0.21
+  Downloaded yoke-derive v0.8.4
+  Downloaded synstructure v0.14.0
+  Downloaded tinystr v0.8.5
+  Downloaded writeable v0.6.4
+  Downloaded simple_asn1 v0.6.4
+  Downloaded zerovec-derive v0.11.7
+  Downloaded no_std_io2 v0.9.4
+  Downloaded self_cell v1.3.0
+  Downloaded zmij v1.0.23
+  Downloaded rustversion v1.0.23
+  Downloaded yoke v0.8.4
+  Downloaded spin v0.9.9
+  Downloaded spirv v0.3.0+sdk-1.3.268.0
+  Downloaded time-macros v0.2.32
+  Downloaded unicode-ident v1.0.27
+  Downloaded smallvec v1.16.5
+  Downloaded weezl v0.1.12
+  Downloaded proc-macro2 v1.0.107
+  Downloaded serde_core v1.0.229
+  Downloaded zune-core v0.5.3
+  Downloaded miniz_oxide v0.9.1
+  Downloaded serde_derive v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded zune-jpeg v0.5.15
+  Downloaded unic-langid-impl v0.9.6
+  Downloaded memchr v2.8.3
+  Downloaded zerotrie v0.2.5
+  Downloaded num-bigint v0.4.8
+  Downloaded rand v0.9.5
+  Downloaded wgpu-types v27.0.1
+  Downloaded minimal-lexical v0.2.1
+  Downloaded nom v7.1.3
+  Downloaded tiff v0.11.3
+  Downloaded zerovec v0.11.9
+  Downloaded zerocopy-derive v0.8.63
+  Downloaded regex v1.13.1
+  Downloaded serde_json v1.0.154
+  Downloaded moxcms v0.8.1
+  Downloaded wgpu v27.0.1
+  Downloaded ttf-parser v0.25.1
+  Downloaded quick-xml v0.37.5
+  Downloaded unicode-width v0.2.3
+  Downloaded zlib-rs v0.6.8
+  Downloaded time v0.3.55
+  Downloaded syn v2.0.119
+  Downloaded syn v3.0.10
+  Downloaded wgpu-core v27.0.3
+  Downloaded regex-syntax v0.8.11
+  Downloaded zerocopy v0.8.63
+  Downloaded rustfft v6.4.1
+  Downloaded wgpu-hal v27.0.4
+  Downloaded regex-automata v0.4.18
+  Downloaded naga v27.0.3
+  Downloaded pxfm v0.1.30
+  Downloaded metal v0.32.0
+  Downloaded 190 crates (19.8MiB) in 2.44s (largest was `metal` at 2.9MiB)
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling autocfg v1.5.1
+   Compiling libm v0.2.16
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling stable_deref_trait v1.2.1
+   Compiling thiserror v2.0.21
+   Compiling num-traits v0.2.19
+   Compiling libc v0.2.191
+   Compiling rustversion v1.0.23
+   Compiling cfg_aliases v0.2.2
+   Compiling smallvec v1.16.5
+   Compiling bitflags v2.13.2
+   Compiling equivalent v1.0.3
+   Compiling log v0.4.35
+   Compiling scopeguard v1.2.0
+   Compiling foldhash v0.2.0
+   Compiling num-conv v0.2.2
+   Compiling allocator-api2 v0.2.21
+   Compiling syn v3.0.10
+   Compiling syn v2.0.119
+   Compiling time-core v0.1.9
+   Compiling encoding_rs v0.8.44
+   Compiling zerocopy v0.8.63
+   Compiling arrayvec v0.7.8
+   Compiling hashbrown v0.16.1
+   Compiling time-macros v0.2.32
+   Compiling hashbrown v0.17.1
+   Compiling simd-adler32 v0.3.10
+   Compiling crossbeam-utils v0.8.23
+   Compiling once_cell v1.21.4
+   Compiling indexmap v2.14.2
+   Compiling pin-project-lite v0.2.17
+   Compiling proc-macro-hack v0.5.20+deprecated
+   Compiling multiversion_no_op v1.0.0
+   Compiling adler2 v2.0.1
+   Compiling crc32fast v1.5.5
+   Compiling core-foundation-sys v0.8.7
+   Compiling num-integer v0.1.47
+   Compiling lock_api v0.4.14
+   Compiling miniz_oxide v0.9.1
+   Compiling naga v27.0.3
+   Compiling unicode-width v0.2.3
+   Compiling bit-vec v0.8.0
+   Compiling termcolor v1.4.1
+   Compiling paste v1.0.15
+   Compiling synstructure v0.14.0
+   Compiling parking_lot_core v0.9.12
+   Compiling flate2 v1.1.11
+   Compiling codespan-reporting v0.12.0
+   Compiling bit-set v0.8.0
+   Compiling core-foundation v0.10.1
+   Compiling malloc_buf v0.0.6
+   Compiling foreign-types-shared v0.3.1
+   Compiling rustc-hash v1.1.0
+   Compiling crossbeam-epoch v0.9.21
+   Compiling hexf-parse v0.2.1
+   Compiling core-graphics-types v0.2.0
+   Compiling objc v0.2.7
+   Compiling aho-corasick v1.1.5
+   Compiling zerocopy-derive v0.8.63
+   Compiling enum-map-derive v0.17.0
+   Compiling num-derive v0.4.2
+   Compiling euclid v0.22.14
+   Compiling thiserror-impl v2.0.21
+   Compiling displaydoc v0.2.7
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling bytemuck_derive v1.12.1
+   Compiling tinystr v0.8.5
+   Compiling foreign-types-macros v0.2.4
+   Compiling unic-langid-impl v0.9.6
+   Compiling wgpu-hal v27.0.4
+   Compiling zerofrom v0.1.8
+   Compiling unic-langid-macros-impl v0.9.6
+   Compiling yoke v0.8.4
+   Compiling bytemuck v1.25.2
+   Compiling foreign-types v0.5.0
+   Compiling block v0.1.6
+   Compiling regex-syntax v0.8.11
+   Compiling byteorder v1.5.0
+   Compiling zerovec v0.11.9
+   Compiling wgpu-types v27.0.1
+   Compiling metal v0.32.0
+   Compiling lyon_geom v1.0.20
+   Compiling parking_lot v0.12.5
+   Compiling regex-automata v0.4.18
+   Compiling simdutf8 v0.1.5
+   Compiling raw-window-handle v0.6.2
+   Compiling litemap v0.8.3
+   Compiling utf_types v1.0.0
+   Compiling profiling v1.0.18
+   Compiling powerfmt v0.2.1
+   Compiling crc-catalog v2.5.0
+   Compiling deranged v0.5.9
+   Compiling writeable v0.6.4
+   Compiling crossbeam-deque v0.8.8
+   Compiling half v2.7.1
+   Compiling icu_locale_core v2.4.0
+   Compiling crc v3.4.0
+   Compiling utf8_iter v1.1.0
+   Compiling time v0.3.55
+   Compiling potential_utf v0.1.6
+   Compiling lyon_path v1.0.19
+   Compiling zerotrie v0.2.5
+   Compiling tracing-attributes v0.1.31
+   Compiling num-bigint v0.4.8
+   Compiling tracing-core v0.1.36
+   Compiling wgpu-core v27.0.3
+   Compiling no_std_io2 v0.9.4
+   Compiling same-file v1.0.6
+   Compiling icu_normalizer_data v2.4.0
+   Compiling litrs v1.0.1
+   Compiling icu_properties_data v2.4.0
+   Compiling weezl v0.1.12
+   Compiling utf8parse v0.2.2
+   Compiling document-features v0.2.12
+   Compiling anstyle-parse v1.0.0
+   Compiling simple_asn1 v0.6.4
+   Compiling tracing v0.1.44
+   Compiling walkdir v2.5.0
+   Compiling bitstream-io v4.10.0
+   Compiling icu_provider v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling unic-langid-macros v0.9.6
+   Compiling lzma-rs v0.3.0
+   Compiling safe_arch v0.7.4
+   Compiling enum-map v2.7.3
+   Compiling wgpu v27.0.1
+   Compiling fnv v1.0.7
+   Compiling colorchoice v1.0.5
+   Compiling float_next_after v1.0.0
+   Compiling version_check v0.9.5
+   Compiling ident_case v1.0.1
+   Compiling anstyle v1.0.14
+   Compiling futures-core v0.3.34
+   Compiling anstyle-query v1.1.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstream v1.0.0
+   Compiling slotmap v1.1.1
+   Compiling darling_core v0.21.3
+   Compiling lyon_tessellation v1.0.23
+   Compiling swf v0.2.2 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling unic-langid v0.9.6
+   Compiling wide v0.7.33
+   Compiling wgpu-core-deps-apple v27.0.0
+   Compiling lyon_algorithms v1.0.22
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling static_assertions v1.1.0
+   Compiling futures-sink v0.3.34
+   Compiling ruffle_wstr v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling strsim v0.11.1
+   Compiling heck v0.5.0
+   Compiling color_quant v1.1.0
+   Compiling clap_lex v1.1.2
+   Compiling clap_builder v4.6.7
+   Compiling gif v0.14.2
+   Compiling clap_derive v4.6.8
+   Compiling futures-channel v0.3.34
+   Compiling png v0.18.1
+   Compiling lyon v1.0.19
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling h263-rs-yuv v0.1.0 (https://github.com/ruffle-rs/h263-rs?rev=b3f905511acc7b80861dac45fdc5ca913b6029e5#b3f90551)
+   Compiling darling_macro v0.21.3
+   Compiling naga-agal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pixel_bender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling futures-macro v0.3.34
+   Compiling bstr v1.13.1
+   Compiling futures-task v0.3.34
+   Compiling zune-core v0.5.3
+   Compiling serde_core v1.0.229
+   Compiling rustc-hash v2.1.3
+   Compiling slab v0.4.12
+   Compiling getrandom v0.3.4
+   Compiling futures-io v0.3.34
+   Compiling unicode-segmentation v1.13.3
+   Compiling jpeg-decoder v0.3.2
+   Compiling convert_case v0.11.0
+   Compiling futures-util v0.3.34
+   Compiling ruffle_render v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling type-map v0.5.1
+   Compiling zune-jpeg v0.5.15
+   Compiling globset v0.4.21
+   Compiling spin v0.9.9
+   Compiling darling v0.21.3
+   Compiling idna_adapter v1.2.2
+   Compiling clap v4.6.8
+   Compiling regex v1.13.1
+   Compiling synstructure v0.13.2
+   Compiling anyhow v1.0.104
+   Compiling parking v2.2.1
+   Compiling zmij v1.0.23
+   Compiling percent-encoding v2.3.2
+   Compiling strength_reduce v0.2.4
+   Compiling fax v0.2.7
+   Compiling pxfm v0.1.30
+   Compiling quick-error v2.0.1
+   Compiling transpose v0.2.3
+   Compiling gc-arena-derive v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling form_urlencoded v1.2.2
+   Compiling tiff v0.11.3
+   Compiling event-listener v5.4.2
+   Compiling build_playerglobal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling enumset_derive v0.15.1
+   Compiling idna v1.1.0
+   Compiling ignore v0.4.34
+   Compiling flume v0.11.1
+   Compiling futures-executor v0.3.34
+   Compiling intl-memoizer v0.5.3
+   Compiling intl_pluralrules v7.0.2
+   Compiling fluent-langneg v0.13.1
+   Compiling moxcms v0.8.1
+   Compiling fluent-syntax v0.12.0
+   Compiling primal-check v0.3.4
+   Compiling num-complex v0.4.6
+   Compiling serde v1.0.229
+   Compiling self_cell v1.3.0
+   Compiling minimal-lexical v0.2.1
+   Compiling serde_json v1.0.154
+   Compiling byteorder-lite v0.1.0
+   Compiling rustfft v6.4.1
+   Compiling nom v7.1.3
+   Compiling fluent-bundle v0.16.0
+   Compiling fluent-template-macros v0.13.3
+   Compiling rand_core v0.9.5
+   Compiling futures v0.3.34
+   Compiling enumset v1.1.15
+   Compiling ruffle_core v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling url v2.5.8
+   Compiling gc-arena v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling event-listener-strategy v0.5.4
+   Compiling concurrent-queue v2.5.0
+   Compiling image v0.25.10
+   Compiling ruffle_macros v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling iana-time-zone v0.1.65
+   Compiling regress v0.10.3 (https://github.com/ruffle-rs/regras3?rev=6d48179d6bd448f2cc66b76352c9f048dde968d1#6d48179d)
+   Compiling quick-xml v0.37.5
+   Compiling either v1.19.0
+   Compiling itoa v1.0.19
+   Compiling lazy_static v1.5.1
+   Compiling sharded-slab v0.1.7
+   Compiling itertools v0.14.0
+   Compiling ruffle_common v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling chrono v0.4.45
+   Compiling async-channel v2.5.0
+   Compiling fluent-templates v0.13.3
+   Compiling naga-pixelbender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling realfft v3.5.1
+   Compiling flash-lso v0.6.0 (https://github.com/ruffle-rs/rust-flash-lso?rev=998f47c926b9986aabd518fbb7394ff56936d0b0#998f47c9)
+   Compiling rand v0.9.5
+   Compiling ruffle_video v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling matchers v0.2.0
+   Compiling chardetng v0.1.17
+   Compiling id3 v1.17.3
+   Compiling flv-rs v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling lru v0.16.4
+   Compiling thread_local v1.1.10
+   Compiling weak-table v0.3.2
+   Compiling ttf-parser v0.25.1
+   Compiling web-time v1.1.0
+   Compiling tracing-subscriber v0.3.23
+   Compiling ruffle_render_wgpu v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pollster v0.4.0
+   Compiling ruffle_ios v0.0.1 (/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/third_party/ruffle_ios)
+    Finished `release` profile [optimized] target(s) in 2m 40s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+
+== 4/6  configuring the Xcode project (build/MCLE_iOS.xcodeproj)
++ cmake -S . -B build -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/cmake/ios.toolchain.cmake -DPLATFORM=OS64 -DDEPLOYMENT_TARGET=14.0 -DENABLE_WORLD_PROBE=ON
+-- iOS toolchain:
+--   PLATFORM            : OS64
+--   SDK                 : iphoneos
+--   SDK path            : /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk
+--   Deployment target   : 14.0
+--   Architectures       : arm64
+-- The C compiler identification is AppleClang 21.0.0.21000327
+-- The CXX compiler identification is AppleClang 21.0.0.21000327
+-- The OBJC compiler identification is AppleClang 21.0.0.21000327
+-- The OBJCXX compiler identification is AppleClang 21.0.0.21000327
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - failed
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - failed
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting OBJC compiler ABI info
+-- Detecting OBJC compiler ABI info - failed
+-- Check for working OBJC compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+-- Check for working OBJC compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - broken
+CMake Error at /opt/homebrew/share/cmake/Modules/CMakeTestOBJCCompiler.cmake:62 (message):
+  The Objective-C compiler
+
+    "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: '/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/build/CMakeFiles/CMakeScratch/TryCompile-25UoD5'
+    
+    Run Build Command(s): /usr/bin/xcodebuild -project CMAKE_TRY_COMPILE.xcodeproj build -configuration Debug -parallelizeTargets -hideShellScriptEnvironment -target cmTC_5edbf
+    Command line invocation:
+        /Applications/Xcode-beta.app/Contents/Developer/usr/bin/xcodebuild -project CMAKE_TRY_COMPILE.xcodeproj build -configuration Debug -parallelizeTargets -hideShellScriptEnvironment -target cmTC_5edbf
+    
+    ComputePackagePrebuildTargetDependencyGraph
+    
+    CreateBuildRequest
+    
+    SendProjectDescription
+    
+    CreateBuildOperation
+    
+    ComputeTargetDependencyGraph
+    note: Building targets in dependency order
+    note: Target dependency graph (1 target)
+        Target 'cmTC_5edbf' in project 'CMAKE_TRY_COMPILE' (no dependencies)
+    
+    GatherProvisioningInputs
+    
+    CreateBuildDescription
+    
+    ExecuteExternalTool /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -x objective-c -c /dev/null
+    
+    ExecuteExternalTool /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -x c -c /dev/null
+    
+    ExecuteExternalTool /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk -x c -c /dev/null
+    
+    ExecuteExternalTool /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+    
+    Build description signature: c09672876c663c911ec87d52f90f428e
+    Build description path: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/build/CMakeFiles/CMakeScratch/TryCompile-25UoD5/build/XCBuildData/c09672876c663c911ec87d52f90f428e.xcbuilddata
+    /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/build/CMakeFiles/CMakeScratch/TryCompile-25UoD5/CMAKE_TRY_COMPILE.xcodeproj: error: The iOS deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is set to 14.0, but the range of supported deployment target versions is 15.0 to 27.0.x. (in target 'cmTC_5edbf' from project 'CMAKE_TRY_COMPILE')
+    ** BUILD FAILED **
+    
+    
+    
+
+
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:8 (project)
+
+
+-- Configuring incomplete, errors occurred!
+
+ERROR: command failed: cmake -S . -B build -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v7/cmake/ios.toolchain.cmake -DPLATFORM=OS64 -DDEPLOYMENT_TARGET=14.0 -DENABLE_WORLD_PROBE=ON
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v7 % cd /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8 
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v8 % ./build-ipa.sh                                               
+
+== 1/6  fetching sources (neoLegacy + 4JLibs, ~700 MB on first run)
++ bash scripts/fetch-submodules.sh
+found 4 submodule(s) in .gitmodules
+fetching sources with plain git clones
+clone https://git.neolegacy.dev/neoStudiosLCE/neoLegacy.git -> upstream
+Cloning into 'upstream'...
+remote: Enumerating objects: 20075, done.
+remote: Counting objects: 100% (20075/20075), done.
+remote: Compressing objects: 100% (14245/14245), done.
+Receiving objects: 100% (20075/20075), 1.10 GiB | 5.47 MiB/s, done.
+remote: Total 20075 (delta 6027), reused 17619 (delta 5540), pack-reused 0 (from 0)
+Resolving deltas: 100% (6027/6027), done.
+Updating files: 100% (21187/21187), done.
+clone https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git -> third_party/4JLibs
+  removing incomplete third_party/4JLibs
+Cloning into 'third_party/4JLibs'...
+remote: Enumerating objects: 200, done.
+remote: Counting objects: 100% (200/200), done.
+remote: Compressing objects: 100% (185/185), done.
+remote: Total 200 (delta 25), reused 140 (delta 12), pack-reused 0 (from 0)
+Receiving objects: 100% (200/200), 3.50 MiB | 4.10 MiB/s, done.
+Resolving deltas: 100% (25/25), done.
+clone https://github.com/marmalade/gameswf.git -> third_party/gameswf
+  removing incomplete third_party/gameswf
+Cloning into 'third_party/gameswf'...
+remote: Enumerating objects: 325, done.
+remote: Counting objects: 100% (325/325), done.
+remote: Compressing objects: 100% (296/296), done.
+remote: Total 325 (delta 27), reused 322 (delta 27), pack-reused 0 (from 0)
+Receiving objects: 100% (325/325), 967.75 KiB | 6.16 MiB/s, done.
+Resolving deltas: 100% (27/27), done.
+clone https://github.com/KhronosGroup/SPIRV-Cross.git -> third_party/spirv-cross
+  removing incomplete third_party/spirv-cross
+Cloning into 'third_party/spirv-cross'...
+remote: Enumerating objects: 4223, done.
+remote: Counting objects: 100% (4223/4223), done.
+remote: Compressing objects: 100% (2784/2784), done.
+remote: Total 4223 (delta 1906), reused 2793 (delta 1413), pack-reused 0 (from 0)
+Receiving objects: 100% (4223/4223), 2.17 MiB | 8.29 MiB/s, done.
+Resolving deltas: 100% (1906/1906), done.
+fetching neoLegacy's nested 4JLibs
+Submodule 'Minecraft.Client/Windows64/4JLibs' (https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git) registered for path 'Minecraft.Client/Windows64/4JLibs'
+Cloning into '/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Windows64/4JLibs'...
+remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Enumerating objects: 29, done.
+remote: Counting objects: 100% (29/29), done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 11), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (15/15), 5.14 KiB | 202.00 KiB/s, done.
+From https://git.neolegacy.dev/neoStudiosLCE/4JLibs
+ * branch            82eeded18e2afb51771098cefbb45209a5a2f5ec -> FETCH_HEAD
+Submodule path 'Minecraft.Client/Windows64/4JLibs': checked out '82eeded18e2afb51771098cefbb45209a5a2f5ec'
+sources ready
+
+== 2/6  patching upstream for iOS
++ bash scripts/apply-patches.sh
+patches: 91 applied, 2 not applicable, 0 failed
++ bash scripts/patch-upstream-stdafx.sh
+patch-upstream-stdafx: wrapped stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: wrapped Minecraft.Client/stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: skipped ItemInstance include on iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ArrayWithLength.h
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/DataOutputStream.cpp
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/DataInputStream.cpp
+patch-upstream-stdafx: routed iOS to zlib branches in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/compression.cpp
+patch-upstream-stdafx: added Level::DEPTH to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Level.h
+patch-upstream-stdafx: rewrote lc->unsaved as setUnsaved(false) in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/FileHeader.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/StringHelpers.cpp
+patch-upstream-stdafx: inserted ChunkSource.h include into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LevelData.cpp
+patch-upstream-stdafx: routed iOS through Durango branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/DirectoryLevelStorage.cpp
+patch-upstream-stdafx: forward-declared DispenserTileEntity in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/WeighedTreasure.h
+patch-upstream-stdafx: added Biome.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/FlatGeneratorInfo.cpp
+patch-upstream-stdafx: added Entity.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/EntitySelector.cpp
+patch-upstream-stdafx: added SavedData headers to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/SavedDataStorage.cpp
+patch-upstream-stdafx: added compression.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/GameRules/ConsoleSchematicFile.h
+patch-upstream-stdafx: renamed hellSand_Id -> soulsand_Id in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/NetherStalkTile.cpp
+patch-upstream-stdafx: added ClothTile.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ClothTileItem.cpp
+patch-upstream-stdafx: rewrote lc->blocks= as setBlockData() in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: added nullptr arg to finalizeMobSpawn in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/MonsterPlacerItem.cpp
+patch-upstream-stdafx: Ocelot.h has no getMaxHealth override, skipping
+patch-upstream-stdafx: Ocelot.cpp has no getMaxHealth definition, skipping
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load signature
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load body
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/SpringTile.cpp
+patch-upstream-stdafx: added handleRidePacket virtual to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/PacketListener.h
+patch-upstream-stdafx: added handleRidePacket body to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/PacketListener.cpp
+patch-upstream-stdafx: gated UIVec2D in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: renamed CLICKED_OUTSIDE -> SLOT_CLICKED_OUTSIDE in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/AbstractContainerScreen.cpp
+patch-upstream-stdafx: rewrote SetFilePointer nullptr->FILE_BEGIN in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ZoneIo.cpp
+patch-upstream-stdafx: added Ocelot.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/OcelotModel.cpp
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/GameMode.cpp
+patch-upstream-stdafx: gated ConnectionProgressParams in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated CustomDrawData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated SoundEngine.h
+patch-upstream-stdafx: rewrote FileEntrySaveData read for iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added SoundTypes.h include to IUIController.h
+patch-upstream-stdafx: added GameMode subclass includes to Minecraft.cpp
+patch-upstream-stdafx: gated PostProcesser.h body for iOS
+grep: parentheses not balanced
+patch-upstream-stdafx: added wchar_t overload for convStringToWstring
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added glLight fwd decl to Lighting.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Minecraft.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+patch-getskycolor-checkpoints: stub (logs no longer needed)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Textures.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TextureManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/StitchedTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/CompassTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ClockTexture.cpp
+already patched
+already patched
+patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/PreStitchedTextureMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TextureMap.cpp
+already patched
+Texture.cpp already patched
+TextureManager.cpp already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/CompressedTileStorage.cpp
+already patched
+already patched
+already patched
+already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Gui.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Tesselator.cpp
+not applicable (normal() already uses int8_t): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Tesselator.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Colours/ColourTable.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/TallGrass.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/EntityTracker.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Chunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Region.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: Minecraft.World/StructureStart.h
+already patched: Minecraft.Client/Common/GameRules/GameRuleDefinition.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/CompassItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ClockItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/SoundEngine.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_IngameTooltips.inc (1194 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_DefineActions.inc (135 mappings)
+gen-html-format: CMinecraftApp::FormatChatMessage is gone from upstream, emitting a fallback
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_FormatHTML.inc (8 functions)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_HowToPlay.inc (38 labels)
+gen-chat-handler: mapped EscapeHTMLString, FormatColoredString, getEntityName, SetGlobalXuiAction
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_HandleChat.inc
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_PrivilegeChanges.inc
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/PlayerList.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_AbstractContainerMenu.inc (1726 lines)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad] != nullptr' (upstream had 2)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad]->getTutorial()' (upstream had 2)
+gen-crafting-menu: 2x banner craft call made a no-op (no connection on iOS)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_CraftingMenu.inc (2171 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_CreativeMenu.inc (1601 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_AnvilMenu.inc (262 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_BeaconMenu.inc (400 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_TradingMenu.inc (375 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/DLC/DLCManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/DLC/DLCSkinFile.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_SkinSelectMenu.inc (2009 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_CreditDefs.inc (502 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/TexturePackRepository.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/AbstractTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/DLCTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/File.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ConsoleSaveFileOriginal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ConsoleSaveFileOriginal.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/WitchRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/WitchModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/EnderDragonRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/EnderCrystalRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/DragonModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LivingEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerLevel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LightningBolt.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/FireworksRocketEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/EnderDragon.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/BaseMobSpawner.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/MinecraftServer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/OldChunkStorage.cpp
+not applicable (findSeed has no progress renderer): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/BiomeSource.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/GameRules/GameRuleManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/compression.h
+gen-tutorial: ChoiceTask::isCompleted returns on every path upstream
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/iOS_Tutorial.inc (2719 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Tutorial/ControllerTask.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/PlayerList.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/GameRules/CollectItemRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/GameRules/CompleteAllRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/LivingEntity.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/MapItemSavedData.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/DyePowderItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Mob.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/BreedGoal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Inventory.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/MapItemSavedData.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Entity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Minecart.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/PortalTile.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.World/ThrownEnderpearl.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/upstream/Minecraft.Client/ItemInHandRenderer.cpp
++ bash scripts/patch-gameswf.sh
+gameswf patch: scanned 298 files, updated 8
++ python3 scripts/make-app-icon.py
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/Resources/AppIcon60x60@2x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/Resources/AppIcon60x60@3x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/Resources/AppIcon76x76@2x~ipad.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/Resources/AppIcon83.5x83.5@2x~ipad.png
+
+== 3/6  building ruffle_ios for arm64 (first run compiles a lot of crates)
++ cargo build --release --target aarch64-apple-ios
+    Updating crates.io index
+    Updating git repository `https://github.com/dtentiion/ruffle`
+    Updating git repository `https://github.com/kyren/gc-arena.git`
+    Updating git repository `https://github.com/ruffle-rs/regras3`
+    Updating git repository `https://github.com/ruffle-rs/rust-flash-lso`
+    Updating git repository `https://github.com/ruffle-rs/h263-rs`
+     Locking 348 packages to latest compatible versions
+      Adding pollster v0.4.0 (available: v1.0.2)
+      Adding wgpu v27.0.1 (available: v30.0.2)
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling autocfg v1.5.1
+   Compiling libm v0.2.16
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling stable_deref_trait v1.2.1
+   Compiling thiserror v2.0.21
+   Compiling num-traits v0.2.19
+   Compiling libc v0.2.191
+   Compiling smallvec v1.16.5
+   Compiling bitflags v2.13.2
+   Compiling rustversion v1.0.23
+   Compiling cfg_aliases v0.2.2
+   Compiling log v0.4.35
+   Compiling scopeguard v1.2.0
+   Compiling equivalent v1.0.3
+   Compiling foldhash v0.2.0
+   Compiling syn v3.0.10
+   Compiling syn v2.0.119
+   Compiling allocator-api2 v0.2.21
+   Compiling encoding_rs v0.8.44
+   Compiling arrayvec v0.7.8
+   Compiling num-conv v0.2.2
+   Compiling zerocopy v0.8.63
+   Compiling time-core v0.1.9
+   Compiling hashbrown v0.16.1
+   Compiling time-macros v0.2.32
+   Compiling crossbeam-utils v0.8.23
+   Compiling once_cell v1.21.4
+   Compiling simd-adler32 v0.3.10
+   Compiling hashbrown v0.17.1
+   Compiling core-foundation-sys v0.8.7
+   Compiling multiversion_no_op v1.0.0
+   Compiling pin-project-lite v0.2.17
+   Compiling adler2 v2.0.1
+   Compiling proc-macro-hack v0.5.20+deprecated
+   Compiling crc32fast v1.5.5
+   Compiling num-integer v0.1.47
+   Compiling indexmap v2.14.2
+   Compiling lock_api v0.4.14
+   Compiling miniz_oxide v0.9.1
+   Compiling synstructure v0.14.0
+   Compiling naga v27.0.3
+   Compiling parking_lot_core v0.9.12
+   Compiling termcolor v1.4.1
+   Compiling paste v1.0.15
+   Compiling bit-vec v0.8.0
+   Compiling unicode-width v0.2.3
+   Compiling bit-set v0.8.0
+   Compiling codespan-reporting v0.12.0
+   Compiling flate2 v1.1.11
+   Compiling core-foundation v0.10.1
+   Compiling malloc_buf v0.0.6
+   Compiling foreign-types-shared v0.3.1
+   Compiling hexf-parse v0.2.1
+   Compiling zerocopy-derive v0.8.63
+   Compiling enum-map-derive v0.17.0
+   Compiling num-derive v0.4.2
+   Compiling thiserror-impl v2.0.21
+   Compiling displaydoc v0.2.7
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling bytemuck_derive v1.12.1
+   Compiling zerofrom v0.1.8
+   Compiling tinystr v0.8.5
+   Compiling foreign-types-macros v0.2.4
+   Compiling yoke v0.8.4
+   Compiling unic-langid-impl v0.9.6
+   Compiling crossbeam-epoch v0.9.21
+   Compiling bytemuck v1.25.2
+   Compiling unic-langid-macros-impl v0.9.6
+   Compiling rustc-hash v1.1.0
+   Compiling zerovec v0.11.9
+   Compiling foreign-types v0.5.0
+   Compiling core-graphics-types v0.2.0
+   Compiling objc v0.2.7
+   Compiling aho-corasick v1.1.5
+   Compiling euclid v0.22.14
+   Compiling wgpu-hal v27.0.4
+   Compiling block v0.1.6
+   Compiling regex-syntax v0.8.11
+   Compiling byteorder v1.5.0
+   Compiling lyon_geom v1.0.20
+   Compiling metal v0.32.0
+   Compiling parking_lot v0.12.5
+   Compiling wgpu-types v27.0.1
+   Compiling deranged v0.5.9
+   Compiling crossbeam-deque v0.8.8
+   Compiling regex-automata v0.4.18
+   Compiling raw-window-handle v0.6.2
+   Compiling writeable v0.6.4
+   Compiling profiling v1.0.18
+   Compiling litemap v0.8.3
+   Compiling simdutf8 v0.1.5
+   Compiling half v2.7.1
+   Compiling utf_types v1.0.0
+   Compiling crc-catalog v2.5.0
+   Compiling powerfmt v0.2.1
+   Compiling crc v3.4.0
+   Compiling utf8_iter v1.1.0
+   Compiling time v0.3.55
+   Compiling icu_locale_core v2.4.0
+   Compiling lyon_path v1.0.19
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+   Compiling tracing-attributes v0.1.31
+   Compiling num-bigint v0.4.8
+   Compiling tracing-core v0.1.36
+   Compiling wgpu-core v27.0.3
+   Compiling no_std_io2 v0.9.4
+   Compiling icu_properties_data v2.4.0
+   Compiling icu_normalizer_data v2.4.0
+   Compiling utf8parse v0.2.2
+   Compiling same-file v1.0.6
+   Compiling litrs v1.0.1
+   Compiling weezl v0.1.12
+   Compiling walkdir v2.5.0
+   Compiling simple_asn1 v0.6.4
+   Compiling document-features v0.2.12
+   Compiling tracing v0.1.44
+   Compiling anstyle-parse v1.0.0
+   Compiling bitstream-io v4.10.0
+   Compiling icu_provider v2.4.0
+   Compiling unic-langid-macros v0.9.6
+   Compiling icu_collections v2.4.0
+   Compiling lzma-rs v0.3.0
+   Compiling safe_arch v0.7.4
+   Compiling enum-map v2.7.3
+   Compiling wgpu v27.0.1
+   Compiling futures-core v0.3.34
+   Compiling anstyle v1.0.14
+   Compiling version_check v0.9.5
+   Compiling float_next_after v1.0.0
+   Compiling ident_case v1.0.1
+   Compiling anstyle-query v1.1.5
+   Compiling fnv v1.0.7
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling colorchoice v1.0.5
+   Compiling anstream v1.0.0
+   Compiling darling_core v0.21.3
+   Compiling slotmap v1.1.1
+   Compiling lyon_tessellation v1.0.23
+   Compiling swf v0.2.2 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling wide v0.7.33
+   Compiling wgpu-core-deps-apple v27.0.0
+   Compiling unic-langid v0.9.6
+   Compiling lyon_algorithms v1.0.22
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling futures-sink v0.3.34
+   Compiling heck v0.5.0
+   Compiling ruffle_wstr v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling color_quant v1.1.0
+   Compiling strsim v0.11.1
+   Compiling clap_lex v1.1.2
+   Compiling static_assertions v1.1.0
+   Compiling clap_builder v4.6.7
+   Compiling gif v0.14.2
+   Compiling clap_derive v4.6.8
+   Compiling futures-channel v0.3.34
+   Compiling png v0.18.1
+   Compiling lyon v1.0.19
+   Compiling icu_normalizer v2.4.0
+   Compiling icu_properties v2.4.0
+   Compiling h263-rs-yuv v0.1.0 (https://github.com/ruffle-rs/h263-rs?rev=b3f905511acc7b80861dac45fdc5ca913b6029e5#b3f90551)
+   Compiling darling_macro v0.21.3
+   Compiling naga-agal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pixel_bender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling futures-macro v0.3.34
+   Compiling bstr v1.13.1
+   Compiling slab v0.4.12
+   Compiling zune-core v0.5.3
+   Compiling jpeg-decoder v0.3.2
+   Compiling unicode-segmentation v1.13.3
+   Compiling futures-io v0.3.34
+   Compiling getrandom v0.3.4
+   Compiling serde_core v1.0.229
+   Compiling rustc-hash v2.1.3
+   Compiling futures-task v0.3.34
+   Compiling futures-util v0.3.34
+   Compiling ruffle_render v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling type-map v0.5.1
+   Compiling convert_case v0.11.0
+   Compiling zune-jpeg v0.5.15
+   Compiling globset v0.4.21
+   Compiling spin v0.9.9
+   Compiling idna_adapter v1.2.2
+   Compiling darling v0.21.3
+   Compiling clap v4.6.8
+   Compiling regex v1.13.1
+   Compiling synstructure v0.13.2
+   Compiling parking v2.2.1
+   Compiling anyhow v1.0.104
+   Compiling quick-error v2.0.1
+   Compiling percent-encoding v2.3.2
+   Compiling fax v0.2.7
+   Compiling zmij v1.0.23
+   Compiling strength_reduce v0.2.4
+   Compiling pxfm v0.1.30
+   Compiling transpose v0.2.3
+   Compiling tiff v0.11.3
+   Compiling build_playerglobal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling form_urlencoded v1.2.2
+   Compiling gc-arena-derive v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling event-listener v5.4.2
+   Compiling enumset_derive v0.15.1
+   Compiling futures-executor v0.3.34
+   Compiling idna v1.1.0
+   Compiling ignore v0.4.34
+   Compiling flume v0.11.1
+   Compiling moxcms v0.8.1
+   Compiling intl-memoizer v0.5.3
+   Compiling intl_pluralrules v7.0.2
+   Compiling fluent-langneg v0.13.1
+   Compiling fluent-syntax v0.12.0
+   Compiling primal-check v0.3.4
+   Compiling num-complex v0.4.6
+   Compiling serde_json v1.0.154
+   Compiling serde v1.0.229
+   Compiling self_cell v1.3.0
+   Compiling byteorder-lite v0.1.0
+   Compiling minimal-lexical v0.2.1
+   Compiling rustfft v6.4.1
+   Compiling nom v7.1.3
+   Compiling fluent-bundle v0.16.0
+   Compiling fluent-template-macros v0.13.3
+   Compiling rand_core v0.9.5
+   Compiling enumset v1.1.15
+   Compiling url v2.5.8
+   Compiling futures v0.3.34
+   Compiling gc-arena v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling event-listener-strategy v0.5.4
+   Compiling ruffle_core v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling image v0.25.10
+   Compiling concurrent-queue v2.5.0
+   Compiling ruffle_macros v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling iana-time-zone v0.1.65
+   Compiling regress v0.10.3 (https://github.com/ruffle-rs/regras3?rev=6d48179d6bd448f2cc66b76352c9f048dde968d1#6d48179d)
+   Compiling quick-xml v0.37.5
+   Compiling either v1.19.0
+   Compiling itoa v1.0.19
+   Compiling lazy_static v1.5.1
+   Compiling sharded-slab v0.1.7
+   Compiling itertools v0.14.0
+   Compiling ruffle_common v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling chrono v0.4.45
+   Compiling async-channel v2.5.0
+   Compiling fluent-templates v0.13.3
+   Compiling naga-pixelbender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling realfft v3.5.1
+   Compiling flash-lso v0.6.0 (https://github.com/ruffle-rs/rust-flash-lso?rev=998f47c926b9986aabd518fbb7394ff56936d0b0#998f47c9)
+   Compiling rand v0.9.5
+   Compiling ruffle_video v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling matchers v0.2.0
+   Compiling chardetng v0.1.17
+   Compiling id3 v1.17.3
+   Compiling flv-rs v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling lru v0.16.4
+   Compiling thread_local v1.1.10
+   Compiling ttf-parser v0.25.1
+   Compiling web-time v1.1.0
+   Compiling weak-table v0.3.2
+   Compiling tracing-subscriber v0.3.23
+   Compiling ruffle_render_wgpu v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pollster v0.4.0
+   Compiling ruffle_ios v0.0.1 (/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/third_party/ruffle_ios)
+    Finished `release` profile [optimized] target(s) in 1m 52s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+
+== 4/6  configuring the Xcode project (build/MCLE_iOS.xcodeproj)
++ cmake -S . -B build -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/cmake/ios.toolchain.cmake -DPLATFORM=OS64 -DDEPLOYMENT_TARGET=15.0 -DENABLE_WORLD_PROBE=ON
+-- iOS toolchain:
+--   PLATFORM            : OS64
+--   SDK                 : iphoneos
+--   SDK path            : /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk
+--   Deployment target   : 15.0
+--   Architectures       : arm64
+-- The C compiler identification is AppleClang 21.0.0.21000327
+-- The CXX compiler identification is AppleClang 21.0.0.21000327
+-- The OBJC compiler identification is AppleClang 21.0.0.21000327
+-- The OBJCXX compiler identification is AppleClang 21.0.0.21000327
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting OBJC compiler ABI info
+-- Detecting OBJC compiler ABI info - done
+-- Check for working OBJC compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - skipped
+-- Detecting OBJCXX compiler ABI info
+-- Detecting OBJCXX compiler ABI info - done
+-- Check for working OBJCXX compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ - skipped
+-- Configuring done (11.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/build
+
+== 5/6  building Minecraft.LCE (Release, arm64, unsigned)
++ cmake --build build --config Release -- -quiet
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/iOS_stdafx.h:691:10: fatal error: 
+      '../Minecraft.Client/Windows64Media/strings.h' file not found
+  691 | #include "../Minecraft.Client/Windows64Media/strings.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/iOS_stdafx.h:691:10: fatal error: 
+      '../Minecraft.Client/Windows64Media/strings.h' file not found
+  691 | #include "../Minecraft.Client/Windows64Media/strings.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v8/Minecraft.Client/iOS/iOS_stdafx.h:691:10: fatal error: 
+      '../Minecraft.Client/Windows64Media/strings.h' file not found
+  691 | #include "../Minecraft.Client/Windows64Media/strings.h"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+note: Run script build phase 'Generate CMakeFiles/ZERO_CHECK' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ZERO_CHECK' from project 'MCLE_iOS')
+note: Run script build phase 'Generate CMakeFiles/ALL_BUILD' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ALL_BUILD' from project 'MCLE_iOS')
+** BUILD FAILED **
+
+
+ERROR: command failed: cmake --build build --config Release -- -quiet
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v8 % cd /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9 
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v9 % ./build-ipa.sh                                               
+
+== 1/6  fetching sources (neoLegacy + 4JLibs, ~700 MB on first run)
++ bash scripts/fetch-submodules.sh
+found 4 submodule(s) in .gitmodules
+fetching sources with plain git clones
+clone https://git.neolegacy.dev/neoStudiosLCE/neoLegacy.git -> upstream
+Cloning into 'upstream'...
+remote: Enumerating objects: 20075, done.
+remote: Counting objects: 100% (20075/20075), done.
+remote: Compressing objects: 100% (14245/14245), done.
+Receiving objects: 100% (20075/20075), 1.10 GiB | 4.08 MiB/s, done.
+remote: Total 20075 (delta 6028), reused 17619 (delta 5540), pack-reused 0 (from 0)
+Resolving deltas: 100% (6028/6028), done.
+Updating files: 100% (21187/21187), done.
+clone https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git -> third_party/4JLibs
+  removing incomplete third_party/4JLibs
+Cloning into 'third_party/4JLibs'...
+remote: Enumerating objects: 200, done.
+remote: Counting objects: 100% (200/200), done.
+remote: Compressing objects: 100% (185/185), done.
+remote: Total 200 (delta 25), reused 140 (delta 12), pack-reused 0 (from 0)
+Receiving objects: 100% (200/200), 3.50 MiB | 3.88 MiB/s, done.
+Resolving deltas: 100% (25/25), done.
+clone https://github.com/marmalade/gameswf.git -> third_party/gameswf
+  removing incomplete third_party/gameswf
+Cloning into 'third_party/gameswf'...
+remote: Enumerating objects: 325, done.
+remote: Counting objects: 100% (325/325), done.
+remote: Compressing objects: 100% (296/296), done.
+remote: Total 325 (delta 27), reused 322 (delta 27), pack-reused 0 (from 0)
+Receiving objects: 100% (325/325), 967.75 KiB | 6.49 MiB/s, done.
+Resolving deltas: 100% (27/27), done.
+clone https://github.com/KhronosGroup/SPIRV-Cross.git -> third_party/spirv-cross
+  removing incomplete third_party/spirv-cross
+Cloning into 'third_party/spirv-cross'...
+remote: Enumerating objects: 4223, done.
+remote: Counting objects: 100% (4223/4223), done.
+remote: Compressing objects: 100% (2784/2784), done.
+remote: Total 4223 (delta 1906), reused 2793 (delta 1413), pack-reused 0 (from 0)
+Receiving objects: 100% (4223/4223), 2.17 MiB | 21.15 MiB/s, done.
+Resolving deltas: 100% (1906/1906), done.
+fetching neoLegacy's nested 4JLibs
+Submodule 'Minecraft.Client/Windows64/4JLibs' (https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git) registered for path 'Minecraft.Client/Windows64/4JLibs'
+Cloning into '/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Windows64/4JLibs'...
+remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Enumerating objects: 29, done.
+remote: Counting objects: 100% (29/29), done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 11), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (15/15), 5.14 KiB | 263.00 KiB/s, done.
+From https://git.neolegacy.dev/neoStudiosLCE/4JLibs
+ * branch            82eeded18e2afb51771098cefbb45209a5a2f5ec -> FETCH_HEAD
+Submodule path 'Minecraft.Client/Windows64/4JLibs': checked out '82eeded18e2afb51771098cefbb45209a5a2f5ec'
+sources ready
+
+== 2/6  patching upstream for iOS
++ bash scripts/apply-patches.sh
+patches: 91 applied, 2 not applicable, 0 failed
++ bash scripts/patch-upstream-stdafx.sh
+patch-upstream-stdafx: wrapped stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: wrapped Minecraft.Client/stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: skipped ItemInstance include on iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ArrayWithLength.h
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/DataOutputStream.cpp
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/DataInputStream.cpp
+patch-upstream-stdafx: routed iOS to zlib branches in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/compression.cpp
+patch-upstream-stdafx: added Level::DEPTH to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Level.h
+patch-upstream-stdafx: rewrote lc->unsaved as setUnsaved(false) in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/FileHeader.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/StringHelpers.cpp
+patch-upstream-stdafx: inserted ChunkSource.h include into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LevelData.cpp
+patch-upstream-stdafx: routed iOS through Durango branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/DirectoryLevelStorage.cpp
+patch-upstream-stdafx: forward-declared DispenserTileEntity in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/WeighedTreasure.h
+patch-upstream-stdafx: added Biome.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/FlatGeneratorInfo.cpp
+patch-upstream-stdafx: added Entity.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/EntitySelector.cpp
+patch-upstream-stdafx: added SavedData headers to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/SavedDataStorage.cpp
+patch-upstream-stdafx: added compression.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/GameRules/ConsoleSchematicFile.h
+patch-upstream-stdafx: renamed hellSand_Id -> soulsand_Id in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/NetherStalkTile.cpp
+patch-upstream-stdafx: added ClothTile.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ClothTileItem.cpp
+patch-upstream-stdafx: rewrote lc->blocks= as setBlockData() in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: added nullptr arg to finalizeMobSpawn in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/MonsterPlacerItem.cpp
+patch-upstream-stdafx: Ocelot.h has no getMaxHealth override, skipping
+patch-upstream-stdafx: Ocelot.cpp has no getMaxHealth definition, skipping
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load signature
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load body
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/SpringTile.cpp
+patch-upstream-stdafx: added handleRidePacket virtual to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/PacketListener.h
+patch-upstream-stdafx: added handleRidePacket body to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/PacketListener.cpp
+patch-upstream-stdafx: gated UIVec2D in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: renamed CLICKED_OUTSIDE -> SLOT_CLICKED_OUTSIDE in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/AbstractContainerScreen.cpp
+patch-upstream-stdafx: rewrote SetFilePointer nullptr->FILE_BEGIN in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ZoneIo.cpp
+patch-upstream-stdafx: added Ocelot.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/OcelotModel.cpp
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/GameMode.cpp
+patch-upstream-stdafx: gated ConnectionProgressParams in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated CustomDrawData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated SoundEngine.h
+patch-upstream-stdafx: rewrote FileEntrySaveData read for iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added SoundTypes.h include to IUIController.h
+patch-upstream-stdafx: added GameMode subclass includes to Minecraft.cpp
+patch-upstream-stdafx: gated PostProcesser.h body for iOS
+grep: parentheses not balanced
+patch-upstream-stdafx: added wchar_t overload for convStringToWstring
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added glLight fwd decl to Lighting.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Minecraft.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+patch-getskycolor-checkpoints: stub (logs no longer needed)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Textures.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TextureManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/StitchedTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/CompassTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ClockTexture.cpp
+already patched
+already patched
+patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/PreStitchedTextureMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TextureMap.cpp
+already patched
+Texture.cpp already patched
+TextureManager.cpp already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/CompressedTileStorage.cpp
+already patched
+already patched
+already patched
+already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Gui.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Tesselator.cpp
+not applicable (normal() already uses int8_t): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Tesselator.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Colours/ColourTable.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/TallGrass.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/EntityTracker.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Chunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Region.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: Minecraft.World/StructureStart.h
+already patched: Minecraft.Client/Common/GameRules/GameRuleDefinition.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/CompassItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ClockItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/SoundEngine.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_IngameTooltips.inc (1194 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_DefineActions.inc (135 mappings)
+gen-html-format: CMinecraftApp::FormatChatMessage is gone from upstream, emitting a fallback
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_FormatHTML.inc (8 functions)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_HowToPlay.inc (38 labels)
+gen-chat-handler: mapped EscapeHTMLString, FormatColoredString, getEntityName, SetGlobalXuiAction
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_HandleChat.inc
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_PrivilegeChanges.inc
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/PlayerList.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_AbstractContainerMenu.inc (1726 lines)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad] != nullptr' (upstream had 2)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad]->getTutorial()' (upstream had 2)
+gen-crafting-menu: 2x banner craft call made a no-op (no connection on iOS)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_CraftingMenu.inc (2171 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_CreativeMenu.inc (1601 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_AnvilMenu.inc (262 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_BeaconMenu.inc (400 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_TradingMenu.inc (375 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/DLC/DLCManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/DLC/DLCSkinFile.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_SkinSelectMenu.inc (2009 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_CreditDefs.inc (502 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/TexturePackRepository.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/AbstractTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/DLCTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/File.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ConsoleSaveFileOriginal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ConsoleSaveFileOriginal.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/WitchRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/WitchModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/EnderDragonRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/EnderCrystalRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/DragonModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LivingEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerLevel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LightningBolt.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/FireworksRocketEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/EnderDragon.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/BaseMobSpawner.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/MinecraftServer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/OldChunkStorage.cpp
+not applicable (findSeed has no progress renderer): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/BiomeSource.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/GameRules/GameRuleManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/compression.h
+gen-tutorial: ChoiceTask::isCompleted returns on every path upstream
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/iOS_Tutorial.inc (2719 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Tutorial/ControllerTask.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/PlayerList.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/GameRules/CollectItemRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/GameRules/CompleteAllRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/LivingEntity.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/MapItemSavedData.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/DyePowderItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Mob.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/BreedGoal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Inventory.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/MapItemSavedData.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Entity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Minecart.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/PortalTile.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.World/ThrownEnderpearl.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/upstream/Minecraft.Client/ItemInHandRenderer.cpp
++ bash scripts/patch-gameswf.sh
+gameswf patch: scanned 298 files, updated 8
++ python3 scripts/make-app-icon.py
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/Minecraft.Client/iOS/Resources/AppIcon60x60@2x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/Minecraft.Client/iOS/Resources/AppIcon60x60@3x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/Minecraft.Client/iOS/Resources/AppIcon76x76@2x~ipad.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/Minecraft.Client/iOS/Resources/AppIcon83.5x83.5@2x~ipad.png
+
+== 3/6  building ruffle_ios for arm64 (first run compiles a lot of crates)
++ cargo build --release --target aarch64-apple-ios
+    Updating crates.io index
+    Updating git repository `https://github.com/dtentiion/ruffle`
+    Updating git repository `https://github.com/kyren/gc-arena.git`
+    Updating git repository `https://github.com/ruffle-rs/regras3`
+    Updating git repository `https://github.com/ruffle-rs/rust-flash-lso`
+    Updating git repository `https://github.com/ruffle-rs/h263-rs`
+     Locking 348 packages to latest compatible versions
+      Adding pollster v0.4.0 (available: v1.0.2)
+      Adding wgpu v27.0.1 (available: v30.0.2)
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling autocfg v1.5.1
+   Compiling libm v0.2.16
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling num-traits v0.2.19
+   Compiling thiserror v2.0.21
+   Compiling stable_deref_trait v1.2.1
+   Compiling libc v0.2.191
+   Compiling cfg_aliases v0.2.2
+   Compiling rustversion v1.0.23
+   Compiling smallvec v1.16.5
+   Compiling bitflags v2.13.2
+   Compiling equivalent v1.0.3
+   Compiling scopeguard v1.2.0
+   Compiling log v0.4.35
+   Compiling foldhash v0.2.0
+   Compiling allocator-api2 v0.2.21
+   Compiling zerocopy v0.8.63
+   Compiling arrayvec v0.7.8
+   Compiling time-core v0.1.9
+   Compiling syn v3.0.10
+   Compiling syn v2.0.119
+   Compiling num-conv v0.2.2
+   Compiling encoding_rs v0.8.44
+   Compiling hashbrown v0.16.1
+   Compiling time-macros v0.2.32
+   Compiling once_cell v1.21.4
+   Compiling simd-adler32 v0.3.10
+   Compiling crossbeam-utils v0.8.23
+   Compiling hashbrown v0.17.1
+   Compiling adler2 v2.0.1
+   Compiling thiserror-impl v2.0.21
+   Compiling synstructure v0.14.0
+   Compiling displaydoc v0.2.7
+   Compiling zerovec-derive v0.11.7
+   Compiling zerocopy-derive v0.8.63
+   Compiling bytemuck_derive v1.12.1
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling indexmap v2.14.2
+   Compiling bytemuck v1.25.2
+   Compiling proc-macro-hack v0.5.20+deprecated
+   Compiling zerofrom v0.1.8
+   Compiling pin-project-lite v0.2.17
+   Compiling multiversion_no_op v1.0.0
+   Compiling crc32fast v1.5.5
+   Compiling core-foundation-sys v0.8.7
+   Compiling tinystr v0.8.5
+   Compiling num-derive v0.4.2
+   Compiling enum-map-derive v0.17.0
+   Compiling yoke v0.8.4
+   Compiling num-integer v0.1.47
+   Compiling lock_api v0.4.14
+   Compiling unic-langid-impl v0.9.6
+   Compiling zerovec v0.11.9
+   Compiling miniz_oxide v0.9.1
+   Compiling naga v27.0.3
+   Compiling bit-vec v0.8.0
+   Compiling unicode-width v0.2.3
+   Compiling half v2.7.1
+   Compiling paste v1.0.15
+   Compiling termcolor v1.4.1
+   Compiling parking_lot_core v0.9.12
+   Compiling bit-set v0.8.0
+   Compiling flate2 v1.1.11
+   Compiling codespan-reporting v0.12.0
+   Compiling unic-langid-macros-impl v0.9.6
+   Compiling core-foundation v0.10.1
+   Compiling foreign-types-macros v0.2.4
+   Compiling malloc_buf v0.0.6
+   Compiling foreign-types-shared v0.3.1
+   Compiling rustc-hash v1.1.0
+   Compiling crossbeam-epoch v0.9.21
+   Compiling hexf-parse v0.2.1
+   Compiling core-graphics-types v0.2.0
+   Compiling foreign-types v0.5.0
+   Compiling objc v0.2.7
+   Compiling aho-corasick v1.1.5
+   Compiling euclid v0.22.14
+   Compiling wgpu-hal v27.0.4
+   Compiling regex-syntax v0.8.11
+   Compiling block v0.1.6
+   Compiling byteorder v1.5.0
+   Compiling metal v0.32.0
+   Compiling lyon_geom v1.0.20
+   Compiling parking_lot v0.12.5
+   Compiling wgpu-types v27.0.1
+   Compiling profiling v1.0.18
+   Compiling utf_types v1.0.0
+   Compiling deranged v0.5.9
+   Compiling writeable v0.6.4
+   Compiling regex-automata v0.4.18
+   Compiling crossbeam-deque v0.8.8
+   Compiling litemap v0.8.3
+   Compiling crc-catalog v2.5.0
+   Compiling powerfmt v0.2.1
+   Compiling raw-window-handle v0.6.2
+   Compiling simdutf8 v0.1.5
+   Compiling time v0.3.55
+   Compiling crc v3.4.0
+   Compiling icu_locale_core v2.4.0
+   Compiling utf8_iter v1.1.0
+   Compiling lyon_path v1.0.19
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+   Compiling num-bigint v0.4.8
+   Compiling tracing-attributes v0.1.31
+   Compiling tracing-core v0.1.36
+   Compiling wgpu-core v27.0.3
+   Compiling no_std_io2 v0.9.4
+   Compiling litrs v1.0.1
+   Compiling icu_normalizer_data v2.4.0
+   Compiling icu_properties_data v2.4.0
+   Compiling utf8parse v0.2.2
+   Compiling same-file v1.0.6
+   Compiling weezl v0.1.12
+   Compiling walkdir v2.5.0
+   Compiling anstyle-parse v1.0.0
+   Compiling simple_asn1 v0.6.4
+   Compiling tracing v0.1.44
+   Compiling document-features v0.2.12
+   Compiling bitstream-io v4.10.0
+   Compiling wgpu-core-deps-apple v27.0.0
+   Compiling icu_provider v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling unic-langid-macros v0.9.6
+   Compiling lzma-rs v0.3.0
+   Compiling enum-map v2.7.3
+   Compiling safe_arch v0.7.4
+   Compiling wgpu v27.0.1
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling colorchoice v1.0.5
+   Compiling ident_case v1.0.1
+   Compiling fnv v1.0.7
+   Compiling anstyle-query v1.1.5
+   Compiling version_check v0.9.5
+   Compiling anstyle v1.0.14
+   Compiling futures-core v0.3.34
+   Compiling float_next_after v1.0.0
+   Compiling slotmap v1.1.1
+   Compiling lyon_tessellation v1.0.23
+   Compiling anstream v1.0.0
+   Compiling darling_core v0.21.3
+   Compiling swf v0.2.2 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling wide v0.7.33
+   Compiling unic-langid v0.9.6
+   Compiling lyon_algorithms v1.0.22
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling ruffle_wstr v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling futures-sink v0.3.34
+   Compiling clap_lex v1.1.2
+   Compiling color_quant v1.1.0
+   Compiling heck v0.5.0
+   Compiling strsim v0.11.1
+   Compiling static_assertions v1.1.0
+   Compiling clap_derive v4.6.8
+   Compiling clap_builder v4.6.7
+   Compiling gif v0.14.2
+   Compiling futures-channel v0.3.34
+   Compiling png v0.18.1
+   Compiling lyon v1.0.19
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling h263-rs-yuv v0.1.0 (https://github.com/ruffle-rs/h263-rs?rev=b3f905511acc7b80861dac45fdc5ca913b6029e5#b3f90551)
+   Compiling darling_macro v0.21.3
+   Compiling naga-agal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pixel_bender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling bstr v1.13.1
+   Compiling futures-macro v0.3.34
+   Compiling futures-task v0.3.34
+   Compiling zune-core v0.5.3
+   Compiling jpeg-decoder v0.3.2
+   Compiling serde_core v1.0.229
+   Compiling slab v0.4.12
+   Compiling rustc-hash v2.1.3
+   Compiling getrandom v0.3.4
+   Compiling futures-io v0.3.34
+   Compiling unicode-segmentation v1.13.3
+   Compiling ruffle_render v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling futures-util v0.3.34
+   Compiling type-map v0.5.1
+   Compiling globset v0.4.21
+   Compiling convert_case v0.11.0
+   Compiling zune-jpeg v0.5.15
+   Compiling spin v0.9.9
+   Compiling idna_adapter v1.2.2
+   Compiling darling v0.21.3
+   Compiling clap v4.6.8
+   Compiling regex v1.13.1
+   Compiling synstructure v0.13.2
+   Compiling pxfm v0.1.30
+   Compiling fax v0.2.7
+   Compiling percent-encoding v2.3.2
+   Compiling parking v2.2.1
+   Compiling strength_reduce v0.2.4
+   Compiling zmij v1.0.23
+   Compiling anyhow v1.0.104
+   Compiling quick-error v2.0.1
+   Compiling event-listener v5.4.2
+   Compiling tiff v0.11.3
+   Compiling transpose v0.2.3
+   Compiling gc-arena-derive v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling form_urlencoded v1.2.2
+   Compiling build_playerglobal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling futures-executor v0.3.34
+   Compiling enumset_derive v0.15.1
+   Compiling idna v1.1.0
+   Compiling ignore v0.4.34
+   Compiling moxcms v0.8.1
+   Compiling flume v0.11.1
+   Compiling intl-memoizer v0.5.3
+   Compiling fluent-langneg v0.13.1
+   Compiling intl_pluralrules v7.0.2
+   Compiling primal-check v0.3.4
+   Compiling fluent-syntax v0.12.0
+   Compiling num-complex v0.4.6
+   Compiling byteorder-lite v0.1.0
+   Compiling self_cell v1.3.0
+   Compiling serde_json v1.0.154
+   Compiling minimal-lexical v0.2.1
+   Compiling serde v1.0.229
+   Compiling nom v7.1.3
+   Compiling fluent-bundle v0.16.0
+   Compiling rustfft v6.4.1
+   Compiling fluent-template-macros v0.13.3
+   Compiling rand_core v0.9.5
+   Compiling enumset v1.1.15
+   Compiling url v2.5.8
+   Compiling ruffle_core v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling gc-arena v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling futures v0.3.34
+   Compiling image v0.25.10
+   Compiling event-listener-strategy v0.5.4
+   Compiling concurrent-queue v2.5.0
+   Compiling iana-time-zone v0.1.65
+   Compiling ruffle_macros v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling regress v0.10.3 (https://github.com/ruffle-rs/regras3?rev=6d48179d6bd448f2cc66b76352c9f048dde968d1#6d48179d)
+   Compiling quick-xml v0.37.5
+   Compiling either v1.19.0
+   Compiling lazy_static v1.5.1
+   Compiling itoa v1.0.19
+   Compiling sharded-slab v0.1.7
+   Compiling itertools v0.14.0
+   Compiling chrono v0.4.45
+   Compiling ruffle_common v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling async-channel v2.5.0
+   Compiling realfft v3.5.1
+   Compiling naga-pixelbender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling fluent-templates v0.13.3
+   Compiling flash-lso v0.6.0 (https://github.com/ruffle-rs/rust-flash-lso?rev=998f47c926b9986aabd518fbb7394ff56936d0b0#998f47c9)
+   Compiling rand v0.9.5
+   Compiling ruffle_video v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling matchers v0.2.0
+   Compiling chardetng v0.1.17
+   Compiling id3 v1.17.3
+   Compiling flv-rs v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling lru v0.16.4
+   Compiling thread_local v1.1.10
+   Compiling weak-table v0.3.2
+   Compiling ttf-parser v0.25.1
+   Compiling web-time v1.1.0
+   Compiling tracing-subscriber v0.3.23
+   Compiling ruffle_render_wgpu v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pollster v0.4.0
+   Compiling ruffle_ios v0.0.1 (/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/third_party/ruffle_ios)
+    Finished `release` profile [optimized] target(s) in 2m 32s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+
 == 4/6  configuring the Xcode project (build/MCLE_iOS.xcodeproj)
 + cmake -S . -B build -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v9/cmake/ios.toolchain.cmake -DPLATFORM=OS64 -DDEPLOYMENT_TARGET=15.0 -DENABLE_WORLD_PROBE=ON
 -- iOS toolchain:
@@ -2589,4 +4538,5674 @@ note: Run script build phase 'Generate CMakeFiles/ZERO_CHECK' will be run during
 
 
 ERROR: command failed: cmake --build build --config Release -- -quiet
-rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v9 % 
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v9 % cd /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10 
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v10 % ./build-ipa.sh
+
+== 1/6  fetching sources (neoLegacy + 4JLibs, ~700 MB on first run)
++ bash scripts/fetch-submodules.sh
+found 4 submodule(s) in .gitmodules
+fetching sources with plain git clones
+clone https://git.neolegacy.dev/neoStudiosLCE/neoLegacy.git -> upstream
+Cloning into 'upstream'...
+remote: Enumerating objects: 20075, done.
+remote: Counting objects: 100% (20075/20075), done.
+remote: Compressing objects: 100% (14245/14245), done.
+Receiving objects: 100% (20075/20075), 1.10 GiB | 3.46 MiB/s, done.
+remote: Total 20075 (delta 6028), reused 17619 (delta 5540), pack-reused 0 (from 0)
+Resolving deltas: 100% (6028/6028), done.
+Updating files: 100% (21187/21187), done.
+clone https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git -> third_party/4JLibs
+  removing incomplete third_party/4JLibs
+Cloning into 'third_party/4JLibs'...
+remote: Enumerating objects: 200, done.
+remote: Counting objects: 100% (200/200), done.
+remote: Compressing objects: 100% (185/185), done.
+remote: Total 200 (delta 25), reused 140 (delta 12), pack-reused 0 (from 0)
+Receiving objects: 100% (200/200), 3.50 MiB | 1.93 MiB/s, done.
+Resolving deltas: 100% (25/25), done.
+clone https://github.com/marmalade/gameswf.git -> third_party/gameswf
+  removing incomplete third_party/gameswf
+Cloning into 'third_party/gameswf'...
+remote: Enumerating objects: 325, done.
+remote: Counting objects: 100% (325/325), done.
+remote: Compressing objects: 100% (296/296), done.
+remote: Total 325 (delta 27), reused 322 (delta 27), pack-reused 0 (from 0)
+Receiving objects: 100% (325/325), 967.75 KiB | 1.34 MiB/s, done.
+Resolving deltas: 100% (27/27), done.
+clone https://github.com/KhronosGroup/SPIRV-Cross.git -> third_party/spirv-cross
+  removing incomplete third_party/spirv-cross
+Cloning into 'third_party/spirv-cross'...
+remote: Enumerating objects: 4223, done.
+remote: Counting objects: 100% (4223/4223), done.
+remote: Compressing objects: 100% (2784/2784), done.
+remote: Total 4223 (delta 1906), reused 2793 (delta 1413), pack-reused 0 (from 0)
+Receiving objects: 100% (4223/4223), 2.17 MiB | 5.04 MiB/s, done.
+Resolving deltas: 100% (1906/1906), done.
+fetching neoLegacy's nested 4JLibs
+Submodule 'Minecraft.Client/Windows64/4JLibs' (https://git.neolegacy.dev/neoStudiosLCE/4JLibs.git) registered for path 'Minecraft.Client/Windows64/4JLibs'
+Cloning into '/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Windows64/4JLibs'...
+remote: Total 0 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Enumerating objects: 29, done.
+remote: Counting objects: 100% (29/29), done.
+remote: Compressing objects: 100% (14/14), done.
+remote: Total 15 (delta 11), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (15/15), 5.14 KiB | 309.00 KiB/s, done.
+From https://git.neolegacy.dev/neoStudiosLCE/4JLibs
+ * branch            82eeded18e2afb51771098cefbb45209a5a2f5ec -> FETCH_HEAD
+Submodule path 'Minecraft.Client/Windows64/4JLibs': checked out '82eeded18e2afb51771098cefbb45209a5a2f5ec'
+sources ready
+
+== 2/6  patching upstream for iOS
++ bash scripts/apply-patches.sh
+patches: 91 applied, 2 not applicable, 0 failed
++ bash scripts/patch-upstream-stdafx.sh
+patch-upstream-stdafx: wrapped stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: wrapped Minecraft.Client/stdafx.h body in #ifndef __APPLE_IOS__
+patch-upstream-stdafx: skipped ItemInstance include on iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ArrayWithLength.h
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/DataOutputStream.cpp
+patch-upstream-stdafx: added __APPLE_IOS__ to Sony branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/DataInputStream.cpp
+patch-upstream-stdafx: routed iOS to zlib branches in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/compression.cpp
+patch-upstream-stdafx: added Level::DEPTH to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Level.h
+patch-upstream-stdafx: rewrote lc->unsaved as setUnsaved(false) in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/FileHeader.h
+patch-upstream-stdafx: inserted iOS branch into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/StringHelpers.cpp
+patch-upstream-stdafx: inserted ChunkSource.h include into /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LevelData.cpp
+patch-upstream-stdafx: routed iOS through Durango branch in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/DirectoryLevelStorage.cpp
+patch-upstream-stdafx: forward-declared DispenserTileEntity in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/WeighedTreasure.h
+patch-upstream-stdafx: added Biome.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/FlatGeneratorInfo.cpp
+patch-upstream-stdafx: added Entity.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/EntitySelector.cpp
+patch-upstream-stdafx: added SavedData headers to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/SavedDataStorage.cpp
+patch-upstream-stdafx: added compression.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/GameRules/ConsoleSchematicFile.h
+patch-upstream-stdafx: renamed hellSand_Id -> soulsand_Id in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/NetherStalkTile.cpp
+patch-upstream-stdafx: added ClothTile.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ClothTileItem.cpp
+patch-upstream-stdafx: rewrote lc->blocks= as setBlockData() in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ZonedChunkStorage.cpp
+patch-upstream-stdafx: added nullptr arg to finalizeMobSpawn in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/MonsterPlacerItem.cpp
+patch-upstream-stdafx: Ocelot.h has no getMaxHealth override, skipping
+patch-upstream-stdafx: Ocelot.cpp has no getMaxHealth definition, skipping
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load signature
+patch-upstream-stdafx: rewrote MemoryLevelStorage::load body
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/SpringTile.cpp
+patch-upstream-stdafx: added handleRidePacket virtual to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/PacketListener.h
+patch-upstream-stdafx: added handleRidePacket body to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/PacketListener.cpp
+patch-upstream-stdafx: gated UIVec2D in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: renamed CLICKED_OUTSIDE -> SLOT_CLICKED_OUTSIDE in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/AbstractContainerScreen.cpp
+patch-upstream-stdafx: rewrote SetFilePointer nullptr->FILE_BEGIN in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ZoneIo.cpp
+patch-upstream-stdafx: added Ocelot.h include to /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/OcelotModel.cpp
+patch-upstream-stdafx: rewrote setTile -> setTileAndData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/GameMode.cpp
+patch-upstream-stdafx: gated ConnectionProgressParams in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated CustomDrawData in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/UI/UIStructs.h
+patch-upstream-stdafx: gated SoundEngine.h
+patch-upstream-stdafx: rewrote FileEntrySaveData read for iOS in /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added SoundTypes.h include to IUIController.h
+patch-upstream-stdafx: added GameMode subclass includes to Minecraft.cpp
+patch-upstream-stdafx: gated PostProcesser.h body for iOS
+grep: parentheses not balanced
+patch-upstream-stdafx: added wchar_t overload for convStringToWstring
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/FileHeader.cpp
+patch-upstream-stdafx: added glLight fwd decl to Lighting.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Minecraft.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+patch-getskycolor-checkpoints: stub (logs no longer needed)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Textures.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TextureManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/StitchedTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/CompassTexture.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ClockTexture.cpp
+already patched
+already patched
+patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/PreStitchedTextureMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TextureMap.cpp
+already patched
+Texture.cpp already patched
+TextureManager.cpp already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/CompressedTileStorage.cpp
+already patched
+already patched
+already patched
+already patched
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Gui.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Tesselator.cpp
+not applicable (normal() already uses int8_t): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Tesselator.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Colours/ColourTable.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/TallGrass.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/PlayerChunkMap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/EntityTracker.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Chunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerChunkCache.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Region.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TileRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LevelChunk.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: Minecraft.World/StructureStart.h
+already patched: Minecraft.Client/Common/GameRules/GameRuleDefinition.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/CompassItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ClockItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/SoundEngine.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/Consoles_SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Level.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/LevelRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_IngameTooltips.inc (1194 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_DefineActions.inc (135 mappings)
+gen-html-format: CMinecraftApp::FormatChatMessage is gone from upstream, emitting a fallback
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_FormatHTML.inc (8 functions)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_HowToPlay.inc (38 labels)
+gen-chat-handler: mapped EscapeHTMLString, FormatColoredString, getEntityName, SetGlobalXuiAction
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_HandleChat.inc
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_PrivilegeChanges.inc
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/PlayerList.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_AbstractContainerMenu.inc (1726 lines)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad] != nullptr' (upstream had 2)
+gen-crafting-menu: 4x 'pMinecraft->localgameModes[iPad]->getTutorial()' (upstream had 2)
+gen-crafting-menu: 2x banner craft call made a no-op (no connection on iOS)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_CraftingMenu.inc (2171 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_CreativeMenu.inc (1601 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_AnvilMenu.inc (262 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_BeaconMenu.inc (400 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_TradingMenu.inc (375 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/DLC/DLCManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/DLC/DLCSkinFile.cpp
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_SkinSelectMenu.inc (2009 lines)
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_CreditDefs.inc (502 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/TexturePackRepository.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/AbstractTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/DLCTexturePack.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/File.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ConsoleSaveFileOriginal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ConsoleSaveFileOriginal.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/WitchRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/WitchModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/EnderDragonRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/EnderCrystalRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/DragonModel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LivingEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerLevel.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LightningBolt.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/FireworksRocketEntity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/EnderDragon.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/BaseMobSpawner.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/BaseMobSpawner.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/MinecraftServer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/OldChunkStorage.cpp
+not applicable (findSeed has no progress renderer): /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/BiomeSource.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/GameRules/GameRuleManager.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/compression.h
+gen-tutorial: ChoiceTask::isCompleted returns on every path upstream
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/iOS_Tutorial.inc (2719 lines)
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Tutorial/ControllerTask.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/PlayerList.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayer.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/GameRules/CollectItemRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/GameRules/CompleteAllRuleDefinition.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/LivingEntity.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/MapItemSavedData.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/DyePowderItem.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Mob.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/BreedGoal.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Inventory.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Common/Audio/SoundEngine.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/MapItemSavedData.h
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/Minimap.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Entity.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Minecart.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/Player.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/PortalTile.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/ThrownEnderpearl.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ServerPlayerGameMode.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ItemInHandRenderer.cpp
+already patched: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/ItemInHandRenderer.cpp
++ bash scripts/patch-gameswf.sh
+gameswf patch: scanned 298 files, updated 8
++ python3 scripts/make-app-icon.py
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/Resources/AppIcon60x60@2x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/Resources/AppIcon60x60@3x.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/Resources/AppIcon76x76@2x~ipad.png
+wrote /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/Resources/AppIcon83.5x83.5@2x~ipad.png
+
+== 3/6  building ruffle_ios for arm64 (first run compiles a lot of crates)
++ cargo build --release --target aarch64-apple-ios
+    Updating crates.io index
+    Updating git repository `https://github.com/dtentiion/ruffle`
+    Updating git repository `https://github.com/kyren/gc-arena.git`
+    Updating git repository `https://github.com/ruffle-rs/regras3`
+    Updating git repository `https://github.com/ruffle-rs/rust-flash-lso`
+    Updating git repository `https://github.com/ruffle-rs/h263-rs`
+     Locking 348 packages to latest compatible versions
+      Adding pollster v0.4.0 (available: v1.0.2)
+      Adding wgpu v27.0.1 (available: v30.0.2)
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling autocfg v1.5.1
+   Compiling libm v0.2.16
+   Compiling cfg-if v1.0.5
+   Compiling memchr v2.8.3
+   Compiling stable_deref_trait v1.2.1
+   Compiling thiserror v2.0.21
+   Compiling num-traits v0.2.19
+   Compiling libc v0.2.191
+   Compiling smallvec v1.16.5
+   Compiling rustversion v1.0.23
+   Compiling cfg_aliases v0.2.2
+   Compiling bitflags v2.13.2
+   Compiling equivalent v1.0.3
+   Compiling log v0.4.35
+   Compiling scopeguard v1.2.0
+   Compiling foldhash v0.2.0
+   Compiling syn v3.0.10
+   Compiling syn v2.0.119
+   Compiling arrayvec v0.7.8
+   Compiling encoding_rs v0.8.44
+   Compiling allocator-api2 v0.2.21
+   Compiling num-conv v0.2.2
+   Compiling zerocopy v0.8.63
+   Compiling time-core v0.1.9
+   Compiling time-macros v0.2.32
+   Compiling hashbrown v0.16.1
+   Compiling simd-adler32 v0.3.10
+   Compiling hashbrown v0.17.1
+   Compiling crossbeam-utils v0.8.23
+   Compiling once_cell v1.21.4
+   Compiling core-foundation-sys v0.8.7
+   Compiling adler2 v2.0.1
+   Compiling indexmap v2.14.2
+   Compiling multiversion_no_op v1.0.0
+   Compiling pin-project-lite v0.2.17
+   Compiling proc-macro-hack v0.5.20+deprecated
+   Compiling crc32fast v1.5.5
+   Compiling num-integer v0.1.47
+   Compiling lock_api v0.4.14
+   Compiling miniz_oxide v0.9.1
+   Compiling naga v27.0.3
+   Compiling synstructure v0.14.0
+   Compiling paste v1.0.15
+   Compiling termcolor v1.4.1
+   Compiling unicode-width v0.2.3
+   Compiling parking_lot_core v0.9.12
+   Compiling bit-vec v0.8.0
+   Compiling codespan-reporting v0.12.0
+   Compiling flate2 v1.1.11
+   Compiling bit-set v0.8.0
+   Compiling core-foundation v0.10.1
+   Compiling malloc_buf v0.0.6
+   Compiling rustc-hash v1.1.0
+   Compiling crossbeam-epoch v0.9.21
+   Compiling hexf-parse v0.2.1
+   Compiling foreign-types-shared v0.3.1
+   Compiling core-graphics-types v0.2.0
+   Compiling objc v0.2.7
+   Compiling aho-corasick v1.1.5
+   Compiling thiserror-impl v2.0.21
+   Compiling displaydoc v0.2.7
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling zerocopy-derive v0.8.63
+   Compiling bytemuck_derive v1.12.1
+   Compiling zerofrom v0.1.8
+   Compiling tinystr v0.8.5
+   Compiling enum-map-derive v0.17.0
+   Compiling num-derive v0.4.2
+   Compiling yoke v0.8.4
+   Compiling unic-langid-impl v0.9.6
+   Compiling foreign-types-macros v0.2.4
+   Compiling unic-langid-macros-impl v0.9.6
+   Compiling zerovec v0.11.9
+   Compiling euclid v0.22.14
+   Compiling foreign-types v0.5.0
+   Compiling bytemuck v1.25.2
+   Compiling wgpu-hal v27.0.4
+   Compiling block v0.1.6
+   Compiling byteorder v1.5.0
+   Compiling regex-syntax v0.8.11
+   Compiling metal v0.32.0
+   Compiling lyon_geom v1.0.20
+   Compiling wgpu-types v27.0.1
+   Compiling parking_lot v0.12.5
+   Compiling writeable v0.6.4
+   Compiling crossbeam-deque v0.8.8
+   Compiling utf_types v1.0.0
+   Compiling regex-automata v0.4.18
+   Compiling powerfmt v0.2.1
+   Compiling simdutf8 v0.1.5
+   Compiling raw-window-handle v0.6.2
+   Compiling profiling v1.0.18
+   Compiling deranged v0.5.9
+   Compiling litemap v0.8.3
+   Compiling crc-catalog v2.5.0
+   Compiling crc v3.4.0
+   Compiling icu_locale_core v2.4.0
+   Compiling time v0.3.55
+   Compiling half v2.7.1
+   Compiling utf8_iter v1.1.0
+   Compiling lyon_path v1.0.19
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+   Compiling tracing-attributes v0.1.31
+   Compiling num-bigint v0.4.8
+   Compiling tracing-core v0.1.36
+   Compiling wgpu-core v27.0.3
+   Compiling no_std_io2 v0.9.4
+   Compiling same-file v1.0.6
+   Compiling icu_normalizer_data v2.4.0
+   Compiling icu_properties_data v2.4.0
+   Compiling litrs v1.0.1
+   Compiling utf8parse v0.2.2
+   Compiling weezl v0.1.12
+   Compiling anstyle-parse v1.0.0
+   Compiling simple_asn1 v0.6.4
+   Compiling document-features v0.2.12
+   Compiling tracing v0.1.44
+   Compiling walkdir v2.5.0
+   Compiling bitstream-io v4.10.0
+   Compiling icu_provider v2.4.0
+   Compiling icu_collections v2.4.0
+   Compiling unic-langid-macros v0.9.6
+   Compiling lzma-rs v0.3.0
+   Compiling safe_arch v0.7.4
+   Compiling enum-map v2.7.3
+   Compiling wgpu v27.0.1
+   Compiling futures-core v0.3.34
+   Compiling fnv v1.0.7
+   Compiling anstyle v1.0.14
+   Compiling version_check v0.9.5
+   Compiling ident_case v1.0.1
+   Compiling anstyle-query v1.1.5
+   Compiling float_next_after v1.0.0
+   Compiling colorchoice v1.0.5
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling lyon_tessellation v1.0.23
+   Compiling anstream v1.0.0
+   Compiling slotmap v1.1.1
+   Compiling darling_core v0.21.3
+   Compiling swf v0.2.2 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling wide v0.7.33
+   Compiling wgpu-core-deps-apple v27.0.0
+   Compiling unic-langid v0.9.6
+   Compiling lyon_algorithms v1.0.22
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling heck v0.5.0
+   Compiling color_quant v1.1.0
+   Compiling static_assertions v1.1.0
+   Compiling futures-sink v0.3.34
+   Compiling strsim v0.11.1
+   Compiling ruffle_wstr v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling clap_lex v1.1.2
+   Compiling clap_builder v4.6.7
+   Compiling futures-channel v0.3.34
+   Compiling gif v0.14.2
+   Compiling clap_derive v4.6.8
+   Compiling png v0.18.1
+   Compiling lyon v1.0.19
+   Compiling icu_properties v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling h263-rs-yuv v0.1.0 (https://github.com/ruffle-rs/h263-rs?rev=b3f905511acc7b80861dac45fdc5ca913b6029e5#b3f90551)
+   Compiling darling_macro v0.21.3
+   Compiling naga-agal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pixel_bender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling futures-macro v0.3.34
+   Compiling bstr v1.13.1
+   Compiling futures-io v0.3.34
+   Compiling unicode-segmentation v1.13.3
+   Compiling futures-task v0.3.34
+   Compiling getrandom v0.3.4
+   Compiling zune-core v0.5.3
+   Compiling rustc-hash v2.1.3
+   Compiling serde_core v1.0.229
+   Compiling jpeg-decoder v0.3.2
+   Compiling slab v0.4.12
+   Compiling futures-util v0.3.34
+   Compiling ruffle_render v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling zune-jpeg v0.5.15
+   Compiling type-map v0.5.1
+   Compiling convert_case v0.11.0
+   Compiling globset v0.4.21
+   Compiling spin v0.9.9
+   Compiling darling v0.21.3
+   Compiling idna_adapter v1.2.2
+   Compiling clap v4.6.8
+   Compiling regex v1.13.1
+   Compiling synstructure v0.13.2
+   Compiling zmij v1.0.23
+   Compiling percent-encoding v2.3.2
+   Compiling fax v0.2.7
+   Compiling strength_reduce v0.2.4
+   Compiling anyhow v1.0.104
+   Compiling parking v2.2.1
+   Compiling quick-error v2.0.1
+   Compiling pxfm v0.1.30
+   Compiling tiff v0.11.3
+   Compiling event-listener v5.4.2
+   Compiling transpose v0.2.3
+   Compiling form_urlencoded v1.2.2
+   Compiling build_playerglobal v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling gc-arena-derive v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling enumset_derive v0.15.1
+   Compiling idna v1.1.0
+   Compiling futures-executor v0.3.34
+   Compiling ignore v0.4.34
+   Compiling flume v0.11.1
+   Compiling intl-memoizer v0.5.3
+   Compiling fluent-langneg v0.13.1
+   Compiling moxcms v0.8.1
+   Compiling intl_pluralrules v7.0.2
+   Compiling fluent-syntax v0.12.0
+   Compiling primal-check v0.3.4
+   Compiling num-complex v0.4.6
+   Compiling byteorder-lite v0.1.0
+   Compiling serde v1.0.229
+   Compiling self_cell v1.3.0
+   Compiling minimal-lexical v0.2.1
+   Compiling serde_json v1.0.154
+   Compiling nom v7.1.3
+   Compiling rustfft v6.4.1
+   Compiling fluent-bundle v0.16.0
+   Compiling fluent-template-macros v0.13.3
+   Compiling rand_core v0.9.5
+   Compiling enumset v1.1.15
+   Compiling futures v0.3.34
+   Compiling url v2.5.8
+   Compiling ruffle_core v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling gc-arena v0.5.3 (https://github.com/kyren/gc-arena.git?rev=75671ae03f53718357b741ed4027560f14e90836#75671ae0)
+   Compiling image v0.25.10
+   Compiling event-listener-strategy v0.5.4
+   Compiling concurrent-queue v2.5.0
+   Compiling ruffle_macros v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling iana-time-zone v0.1.65
+   Compiling regress v0.10.3 (https://github.com/ruffle-rs/regras3?rev=6d48179d6bd448f2cc66b76352c9f048dde968d1#6d48179d)
+   Compiling quick-xml v0.37.5
+   Compiling lazy_static v1.5.1
+   Compiling either v1.19.0
+   Compiling itoa v1.0.19
+   Compiling itertools v0.14.0
+   Compiling ruffle_common v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling sharded-slab v0.1.7
+   Compiling chrono v0.4.45
+   Compiling fluent-templates v0.13.3
+   Compiling async-channel v2.5.0
+   Compiling naga-pixelbender v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling realfft v3.5.1
+   Compiling flash-lso v0.6.0 (https://github.com/ruffle-rs/rust-flash-lso?rev=998f47c926b9986aabd518fbb7394ff56936d0b0#998f47c9)
+   Compiling rand v0.9.5
+   Compiling ruffle_video v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling matchers v0.2.0
+   Compiling chardetng v0.1.17
+   Compiling id3 v1.17.3
+   Compiling flv-rs v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling lru v0.16.4
+   Compiling thread_local v1.1.10
+   Compiling ttf-parser v0.25.1
+   Compiling web-time v1.1.0
+   Compiling weak-table v0.3.2
+   Compiling tracing-subscriber v0.3.23
+   Compiling ruffle_render_wgpu v0.1.0 (https://github.com/dtentiion/ruffle?rev=ed72d5d25#ed72d5d2)
+   Compiling pollster v0.4.0
+   Compiling ruffle_ios v0.0.1 (/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/third_party/ruffle_ios)
+    Finished `release` profile [optimized] target(s) in 2m 27s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+
+== 4/6  configuring the Xcode project (build/MCLE_iOS.xcodeproj)
++ cmake -S . -B build -G Xcode -DCMAKE_TOOLCHAIN_FILE=/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/cmake/ios.toolchain.cmake -DPLATFORM=OS64 -DDEPLOYMENT_TARGET=15.0 -DENABLE_WORLD_PROBE=ON
+-- iOS toolchain:
+--   PLATFORM            : OS64
+--   SDK                 : iphoneos
+--   SDK path            : /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk
+--   Deployment target   : 15.0
+--   Architectures       : arm64
+-- The C compiler identification is AppleClang 21.0.0.21000327
+-- The CXX compiler identification is AppleClang 21.0.0.21000327
+-- The OBJC compiler identification is AppleClang 21.0.0.21000327
+-- The OBJCXX compiler identification is AppleClang 21.0.0.21000327
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting OBJC compiler ABI info
+-- Detecting OBJC compiler ABI info - done
+-- Check for working OBJC compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - skipped
+-- Detecting OBJCXX compiler ABI info
+-- Detecting OBJCXX compiler ABI info - done
+-- Check for working OBJCXX compiler: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ - skipped
+-- Configuring done (12.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/build
+
+== 5/6  building Minecraft.LCE (Release, arm64, unsigned)
++ cmake --build build --config Release -- -quiet
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:700:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Windows64/Xbox_BuildVer.h:45:9: warning: 
+      'VER_FILEVERSION_STR_W' macro redefined [-Wmacro-redefined]
+   45 | #define VER_FILEVERSION_STR_W     VER_FILEVERSION_STR1_W(VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:992:11: note: 
+      previous definition is here
+  992 | #  define VER_FILEVERSION_STR_W L"0.0.1"
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:4:9: warning: 
+      LevelGenerationOptions.h [-W#pragma-messages]
+    4 | #pragma message("LevelGenerationOptions.h ")
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:29:14: warning: 
+      'GetType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   29 |         eINSTANCEOF GetType()                                           { return eTYPE_MOB;}
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:28:14: note: 
+      overridden virtual function is here
+   28 |         eINSTANCEOF GetType() { return eTYPE_LIVINGENTITY; }
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:81:7: warning: 
+      'registerAttributes' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   81 |         void registerAttributes();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:133:15: note: 
+      overridden virtual function is here
+  133 |         virtual void registerAttributes();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:95:15: warning: 
+      'defineSynchedData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   95 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:132:15: note: 
+      overridden virtual function is here
+  132 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:100:15: warning: 
+      'baseTick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  100 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:138:15: note: 
+      overridden virtual function is here
+  138 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:103:14: warning: 
+      'getExperienceReward' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  103 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:144:14: note: 
+      overridden virtual function is here
+  144 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:107:15: warning: 
+      'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  107 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:283:15: note: 
+      overridden virtual function is here
+  283 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:110:16: warning: 
+      'tickHeadTurn' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  110 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:286:16: note: 
+      overridden virtual function is here
+  286 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:113:15: warning: 
+      'dropDeathLoot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  113 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:201:15: note: 
+      overridden virtual function is here
+  201 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:116:15: warning: 
+      'addAdditonalSaveData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  116 |         virtual void addAdditonalSaveData(CompoundTag *entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:156:15: note: 
+      overridden virtual function is here
+  156 |         virtual void addAdditonalSaveData(CompoundTag* entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:117:15: warning: 
+      'readAdditionalSaveData' overrides a member function but is not marked 'override'
+      [-Winconsistent-missing-override]
+  117 |         virtual void readAdditionalSaveData(CompoundTag *tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:157:15: note: 
+      overridden virtual function is here
+  157 |         virtual void readAdditionalSaveData(CompoundTag* tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:124:15: warning: 
+      'setSpeed' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  124 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:280:15: note: 
+      overridden virtual function is here
+  280 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:125:15: warning: 
+      'aiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  125 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:289:15: note: 
+      overridden virtual function is here
+  289 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:128:15: warning: 
+      'useNewAi' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  128 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:276:15: note: 
+      overridden virtual function is here
+  276 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:138:15: warning: 
+      'newServerAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  138 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:292:15: note: 
+      overridden virtual function is here
+  292 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:139:15: warning: 
+      'serverAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  139 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:302:15: note: 
+      overridden virtual function is here
+  302 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:157:14: warning: 
+      'getMaxFallDistance' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  157 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:438:14: note: 
+      overridden virtual function is here
+  438 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:159:35: warning: 
+      'getCarried' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  159 |         virtual shared_ptr<ItemInstance> getCarried(int slot);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:244:35: note: 
+      overridden virtual function is here
+  244 |         virtual shared_ptr<ItemInstance> getCarried(int slot) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:160:35: warning: 
+      'getArmor' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  160 |         virtual shared_ptr<ItemInstance> getArmor(int pos);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:245:35: note: 
+      overridden virtual function is here
+  245 |         virtual shared_ptr<ItemInstance> getArmor(int pos) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:161:15: warning: 
+      'setEquippedSlot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  161 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:246:15: note: 
+      overridden virtual function is here
+  246 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item) = 0;
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:162:28: warning: 
+      'getEquipmentSlots' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  162 |         virtual ItemInstanceArray getEquipmentSlots();
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:249:28: note: 
+      overridden virtual function is here
+  249 |         virtual ItemInstanceArray getEquipmentSlots() = 0;
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:165:15: warning: 
+      'dropEquipment' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  165 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:189:15: note: 
+      overridden virtual function is here
+  189 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:187:18: warning: 
+      'getAName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  187 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:395:18: note: 
+      overridden virtual function is here
+  395 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:189:15: warning: 
+      'setCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  189 |         virtual void setCustomName(const wstring &name);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:466:14: note: 
+      overridden virtual function is here
+  466 | virtual void setCustomName(const wstring& name);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:190:18: warning: 
+      'getCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  190 |         virtual wstring getCustomName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:465:17: note: 
+      overridden virtual function is here
+  465 | virtual wstring getCustomName();
+      |                 ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:191:15: warning: 
+      'hasCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  191 |         virtual bool hasCustomName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:464:14: note: 
+      overridden virtual function is here
+  464 | virtual bool hasCustomName();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:192:15: warning: 
+      'setCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  192 |         virtual void setCustomNameVisible(bool visible);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:468:14: note: 
+      overridden virtual function is here
+  468 | virtual void setCustomNameVisible(bool visible);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:193:15: warning: 
+      'isCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  193 |         virtual bool isCustomNameVisible();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:467:14: note: 
+      overridden virtual function is here
+  467 | virtual bool isCustomNameVisible();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:194:15: warning: 
+      'shouldShowName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  194 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:265:15: note: 
+      overridden virtual function is here
+  265 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:199:15: warning: 
+      'interact' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  199 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:333:15: note: 
+      overridden virtual function is here
+  333 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:223:15: warning: 
+      'shouldRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  223 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:300:15: note: 
+      overridden virtual function is here
+  300 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:229:15: warning: 
+      'setLevel' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  229 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:278:15: note: 
+      overridden virtual function is here
+  278 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:10:9: warning: 
+      'LEVEL_MAX_WIDTH' macro redefined [-Wmacro-redefined]
+   10 | #define LEVEL_MAX_WIDTH (5*64) //(6*54)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:850:11: note: 
+      previous definition is here
+  850 | #  define LEVEL_MAX_WIDTH       1024
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:12:9: warning: 
+      'LEVEL_WIDTH_CLASSIC' macro redefined [-Wmacro-redefined]
+   12 | #define LEVEL_WIDTH_CLASSIC 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:847:11: note: 
+      previous definition is here
+  847 | #  define LEVEL_WIDTH_CLASSIC   256
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:13:9: warning: 
+      'LEVEL_WIDTH_SMALL' macro redefined [-Wmacro-redefined]
+   13 | #define LEVEL_WIDTH_SMALL 64
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+43 warnings generated.
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:700:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Windows64/Xbox_BuildVer.h:45:9: warning: 
+      'VER_FILEVERSION_STR_W' macro redefined [-Wmacro-redefined]
+   45 | #define VER_FILEVERSION_STR_W     VER_FILEVERSION_STR1_W(VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:992:11: note: 
+      previous definition is here
+  992 | #  define VER_FILEVERSION_STR_W L"0.0.1"
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:4:9: warning: 
+      LevelGenerationOptions.h [-W#pragma-messages]
+    4 | #pragma message("LevelGenerationOptions.h ")
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:29:14: warning: 
+      'GetType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   29 |         eINSTANCEOF GetType()                                           { return eTYPE_MOB;}
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:28:14: note: 
+      overridden virtual function is here
+   28 |         eINSTANCEOF GetType() { return eTYPE_LIVINGENTITY; }
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:81:7: warning: 
+      'registerAttributes' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   81 |         void registerAttributes();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:133:15: note: 
+      overridden virtual function is here
+  133 |         virtual void registerAttributes();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:95:15: warning: 
+      'defineSynchedData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   95 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:132:15: note: 
+      overridden virtual function is here
+  132 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:100:15: warning: 
+      'baseTick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  100 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:138:15: note: 
+      overridden virtual function is here
+  138 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:103:14: warning: 
+      'getExperienceReward' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  103 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:144:14: note: 
+      overridden virtual function is here
+  144 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:107:15: warning: 
+      'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  107 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:283:15: note: 
+      overridden virtual function is here
+  283 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:110:16: warning: 
+      'tickHeadTurn' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  110 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:286:16: note: 
+      overridden virtual function is here
+  286 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:113:15: warning: 
+      'dropDeathLoot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  113 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:201:15: note: 
+      overridden virtual function is here
+  201 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:116:15: warning: 
+      'addAdditonalSaveData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  116 |         virtual void addAdditonalSaveData(CompoundTag *entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:156:15: note: 
+      overridden virtual function is here
+  156 |         virtual void addAdditonalSaveData(CompoundTag* entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:117:15: warning: 
+      'readAdditionalSaveData' overrides a member function but is not marked 'override'
+      [-Winconsistent-missing-override]
+  117 |         virtual void readAdditionalSaveData(CompoundTag *tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:157:15: note: 
+      overridden virtual function is here
+  157 |         virtual void readAdditionalSaveData(CompoundTag* tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:124:15: warning: 
+      'setSpeed' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  124 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:280:15: note: 
+      overridden virtual function is here
+  280 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:125:15: warning: 
+      'aiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  125 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:289:15: note: 
+      overridden virtual function is here
+  289 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:128:15: warning: 
+      'useNewAi' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  128 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:276:15: note: 
+      overridden virtual function is here
+  276 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:138:15: warning: 
+      'newServerAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  138 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:292:15: note: 
+      overridden virtual function is here
+  292 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:139:15: warning: 
+      'serverAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  139 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:302:15: note: 
+      overridden virtual function is here
+  302 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:157:14: warning: 
+      'getMaxFallDistance' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  157 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:438:14: note: 
+      overridden virtual function is here
+  438 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:159:35: warning: 
+      'getCarried' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  159 |         virtual shared_ptr<ItemInstance> getCarried(int slot);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:244:35: note: 
+      overridden virtual function is here
+  244 |         virtual shared_ptr<ItemInstance> getCarried(int slot) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:160:35: warning: 
+      'getArmor' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  160 |         virtual shared_ptr<ItemInstance> getArmor(int pos);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:245:35: note: 
+      overridden virtual function is here
+  245 |         virtual shared_ptr<ItemInstance> getArmor(int pos) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:161:15: warning: 
+      'setEquippedSlot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  161 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:246:15: note: 
+      overridden virtual function is here
+  246 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item) = 0;
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:162:28: warning: 
+      'getEquipmentSlots' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  162 |         virtual ItemInstanceArray getEquipmentSlots();
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:249:28: note: 
+      overridden virtual function is here
+  249 |         virtual ItemInstanceArray getEquipmentSlots() = 0;
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:165:15: warning: 
+      'dropEquipment' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  165 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:189:15: note: 
+      overridden virtual function is here
+  189 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:187:18: warning: 
+      'getAName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  187 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:395:18: note: 
+      overridden virtual function is here
+  395 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:189:15: warning: 
+      'setCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  189 |         virtual void setCustomName(const wstring &name);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:466:14: note: 
+      overridden virtual function is here
+  466 | virtual void setCustomName(const wstring& name);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:190:18: warning: 
+      'getCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  190 |         virtual wstring getCustomName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:465:17: note: 
+      overridden virtual function is here
+  465 | virtual wstring getCustomName();
+      |                 ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:191:15: warning: 
+      'hasCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  191 |         virtual bool hasCustomName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:464:14: note: 
+      overridden virtual function is here
+  464 | virtual bool hasCustomName();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:192:15: warning: 
+      'setCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  192 |         virtual void setCustomNameVisible(bool visible);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:468:14: note: 
+      overridden virtual function is here
+  468 | virtual void setCustomNameVisible(bool visible);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:193:15: warning: 
+      'isCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  193 |         virtual bool isCustomNameVisible();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:467:14: note: 
+      overridden virtual function is here
+  467 | virtual bool isCustomNameVisible();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:194:15: warning: 
+      'shouldShowName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  194 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:265:15: note: 
+      overridden virtual function is here
+  265 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:199:15: warning: 
+      'interact' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  199 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:333:15: note: 
+      overridden virtual function is here
+  333 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:223:15: warning: 
+      'shouldRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  223 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:300:15: note: 
+      overridden virtual function is here
+  300 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:229:15: warning: 
+      'setLevel' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  229 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:278:15: note: 
+      overridden virtual function is here
+  278 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:10:9: warning: 
+      'LEVEL_MAX_WIDTH' macro redefined [-Wmacro-redefined]
+   10 | #define LEVEL_MAX_WIDTH (5*64) //(6*54)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:850:11: note: 
+      previous definition is here
+  850 | #  define LEVEL_MAX_WIDTH       1024
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:12:9: warning: 
+      'LEVEL_WIDTH_CLASSIC' macro redefined [-Wmacro-redefined]
+   12 | #define LEVEL_WIDTH_CLASSIC 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:847:11: note: 
+      previous definition is here
+  847 | #  define LEVEL_WIDTH_CLASSIC   256
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:13:9: warning: 
+      'LEVEL_WIDTH_SMALL' macro redefined [-Wmacro-redefined]
+   13 | #define LEVEL_WIDTH_SMALL 64
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+43 warnings generated.
+ads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+43 warnings generated.
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:700:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Windows64/Xbox_BuildVer.h:45:9: warning: 
+      'VER_FILEVERSION_STR_W' macro redefined [-Wmacro-redefined]
+   45 | #define VER_FILEVERSION_STR_W     VER_FILEVERSION_STR1_W(VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:992:11: note: 
+      previous definition is here
+  992 | #  define VER_FILEVERSION_STR_W L"0.0.1"
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:4:9: warning: 
+      LevelGenerationOptions.h [-W#pragma-messages]
+    4 | #pragma message("LevelGenerationOptions.h ")
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:29:14: warning: 
+      'GetType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   29 |         eINSTANCEOF GetType()                                           { return eTYPE_MOB;}
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:28:14: note: 
+      overridden virtual function is here
+   28 |         eINSTANCEOF GetType() { return eTYPE_LIVINGENTITY; }
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:81:7: warning: 
+      'registerAttributes' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   81 |         void registerAttributes();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:133:15: note: 
+      overridden virtual function is here
+  133 |         virtual void registerAttributes();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:95:15: warning: 
+      'defineSynchedData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   95 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:132:15: note: 
+      overridden virtual function is here
+  132 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:100:15: warning: 
+      'baseTick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  100 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:138:15: note: 
+      overridden virtual function is here
+  138 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:103:14: warning: 
+      'getExperienceReward' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  103 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:144:14: note: 
+      overridden virtual function is here
+  144 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:107:15: warning: 
+      'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  107 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:283:15: note: 
+      overridden virtual function is here
+  283 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:110:16: warning: 
+      'tickHeadTurn' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  110 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:286:16: note: 
+      overridden virtual function is here
+  286 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:113:15: warning: 
+      'dropDeathLoot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  113 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:201:15: note: 
+      overridden virtual function is here
+  201 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:116:15: warning: 
+      'addAdditonalSaveData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  116 |         virtual void addAdditonalSaveData(CompoundTag *entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:156:15: note: 
+      overridden virtual function is here
+  156 |         virtual void addAdditonalSaveData(CompoundTag* entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:117:15: warning: 
+      'readAdditionalSaveData' overrides a member function but is not marked 'override'
+      [-Winconsistent-missing-override]
+  117 |         virtual void readAdditionalSaveData(CompoundTag *tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:157:15: note: 
+      overridden virtual function is here
+  157 |         virtual void readAdditionalSaveData(CompoundTag* tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:124:15: warning: 
+      'setSpeed' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  124 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:280:15: note: 
+      overridden virtual function is here
+  280 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:125:15: warning: 
+      'aiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  125 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:289:15: note: 
+      overridden virtual function is here
+  289 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:128:15: warning: 
+      'useNewAi' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  128 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:276:15: note: 
+      overridden virtual function is here
+  276 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:138:15: warning: 
+      'newServerAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  138 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:292:15: note: 
+      overridden virtual function is here
+  292 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:139:15: warning: 
+      'serverAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  139 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:302:15: note: 
+      overridden virtual function is here
+  302 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:157:14: warning: 
+      'getMaxFallDistance' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  157 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:438:14: note: 
+      overridden virtual function is here
+  438 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:159:35: warning: 
+      'getCarried' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  159 |         virtual shared_ptr<ItemInstance> getCarried(int slot);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:244:35: note: 
+      overridden virtual function is here
+  244 |         virtual shared_ptr<ItemInstance> getCarried(int slot) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:160:35: warning: 
+      'getArmor' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  160 |         virtual shared_ptr<ItemInstance> getArmor(int pos);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:245:35: note: 
+      overridden virtual function is here
+  245 |         virtual shared_ptr<ItemInstance> getArmor(int pos) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:161:15: warning: 
+      'setEquippedSlot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  161 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:246:15: note: 
+      overridden virtual function is here
+  246 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item) = 0;
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:162:28: warning: 
+      'getEquipmentSlots' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  162 |         virtual ItemInstanceArray getEquipmentSlots();
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:249:28: note: 
+      overridden virtual function is here
+  249 |         virtual ItemInstanceArray getEquipmentSlots() = 0;
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:165:15: warning: 
+      'dropEquipment' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  165 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:189:15: note: 
+      overridden virtual function is here
+  189 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:187:18: warning: 
+      'getAName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  187 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:395:18: note: 
+      overridden virtual function is here
+  395 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:189:15: warning: 
+      'setCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  189 |         virtual void setCustomName(const wstring &name);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:466:14: note: 
+      overridden virtual function is here
+  466 | virtual void setCustomName(const wstring& name);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:190:18: warning: 
+      'getCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  190 |         virtual wstring getCustomName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:465:17: note: 
+      overridden virtual function is here
+  465 | virtual wstring getCustomName();
+      |                 ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:191:15: warning: 
+      'hasCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  191 |         virtual bool hasCustomName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:464:14: note: 
+      overridden virtual function is here
+  464 | virtual bool hasCustomName();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:192:15: warning: 
+      'setCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  192 |         virtual void setCustomNameVisible(bool visible);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:468:14: note: 
+      overridden virtual function is here
+  468 | virtual void setCustomNameVisible(bool visible);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:193:15: warning: 
+      'isCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  193 |         virtual bool isCustomNameVisible();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:467:14: note: 
+      overridden virtual function is here
+  467 | virtual bool isCustomNameVisible();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:194:15: warning: 
+      'shouldShowName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  194 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:265:15: note: 
+      overridden virtual function is here
+  265 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:199:15: warning: 
+      'interact' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  199 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:333:15: note: 
+      overridden virtual function is here
+  333 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:223:15: warning: 
+      'shouldRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  223 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:300:15: note: 
+      overridden virtual function is here
+  300 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:229:15: warning: 
+      'setLevel' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  229 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:278:15: note: 
+      overridden virtual function is here
+  278 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:10:9: warning: 
+      'LEVEL_MAX_WIDTH' macro redefined [-Wmacro-redefined]
+   10 | #define LEVEL_MAX_WIDTH (5*64) //(6*54)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:850:11: note: 
+      previous definition is here
+  850 | #  define LEVEL_MAX_WIDTH       1024
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:12:9: warning: 
+      'LEVEL_WIDTH_CLASSIC' macro redefined [-Wmacro-redefined]
+   12 | #define LEVEL_WIDTH_CLASSIC 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:847:11: note: 
+      previous definition is here
+  847 | #  define LEVEL_WIDTH_CLASSIC   256
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:13:9: warning: 
+      'LEVEL_WIDTH_SMALL' macro redefined [-Wmacro-redefined]
+   13 | #define LEVEL_WIDTH_SMALL 64
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+43 warnings generated.
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:700:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Windows64/Xbox_BuildVer.h:45:9: warning: 
+      'VER_FILEVERSION_STR_W' macro redefined [-Wmacro-redefined]
+   45 | #define VER_FILEVERSION_STR_W     VER_FILEVERSION_STR1_W(VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:992:11: note: 
+      previous definition is here
+  992 | #  define VER_FILEVERSION_STR_W L"0.0.1"
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:4:9: warning: 
+      LevelGenerationOptions.h [-W#pragma-messages]
+    4 | #pragma message("LevelGenerationOptions.h ")
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:29:14: warning: 
+      'GetType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   29 |         eINSTANCEOF GetType()                                           { return eTYPE_MOB;}
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:28:14: note: 
+      overridden virtual function is here
+   28 |         eINSTANCEOF GetType() { return eTYPE_LIVINGENTITY; }
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:81:7: warning: 
+      'registerAttributes' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   81 |         void registerAttributes();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:133:15: note: 
+      overridden virtual function is here
+  133 |         virtual void registerAttributes();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:95:15: warning: 
+      'defineSynchedData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   95 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:132:15: note: 
+      overridden virtual function is here
+  132 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:100:15: warning: 
+      'baseTick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  100 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:138:15: note: 
+      overridden virtual function is here
+  138 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:103:14: warning: 
+      'getExperienceReward' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  103 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:144:14: note: 
+      overridden virtual function is here
+  144 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:107:15: warning: 
+      'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  107 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:283:15: note: 
+      overridden virtual function is here
+  283 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:110:16: warning: 
+      'tickHeadTurn' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  110 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:286:16: note: 
+      overridden virtual function is here
+  286 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:113:15: warning: 
+      'dropDeathLoot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  113 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:201:15: note: 
+      overridden virtual function is here
+  201 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:116:15: warning: 
+      'addAdditonalSaveData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  116 |         virtual void addAdditonalSaveData(CompoundTag *entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:156:15: note: 
+      overridden virtual function is here
+  156 |         virtual void addAdditonalSaveData(CompoundTag* entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:117:15: warning: 
+      'readAdditionalSaveData' overrides a member function but is not marked 'override'
+      [-Winconsistent-missing-override]
+  117 |         virtual void readAdditionalSaveData(CompoundTag *tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:157:15: note: 
+      overridden virtual function is here
+  157 |         virtual void readAdditionalSaveData(CompoundTag* tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:124:15: warning: 
+      'setSpeed' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  124 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:280:15: note: 
+      overridden virtual function is here
+  280 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:125:15: warning: 
+      'aiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  125 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:289:15: note: 
+      overridden virtual function is here
+  289 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:128:15: warning: 
+      'useNewAi' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  128 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:276:15: note: 
+      overridden virtual function is here
+  276 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:138:15: warning: 
+      'newServerAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  138 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:292:15: note: 
+      overridden virtual function is here
+  292 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:139:15: warning: 
+      'serverAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  139 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:302:15: note: 
+      overridden virtual function is here
+  302 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:157:14: warning: 
+      'getMaxFallDistance' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  157 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:438:14: note: 
+      overridden virtual function is here
+  438 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:159:35: warning: 
+      'getCarried' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  159 |         virtual shared_ptr<ItemInstance> getCarried(int slot);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:244:35: note: 
+      overridden virtual function is here
+  244 |         virtual shared_ptr<ItemInstance> getCarried(int slot) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:160:35: warning: 
+      'getArmor' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  160 |         virtual shared_ptr<ItemInstance> getArmor(int pos);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:245:35: note: 
+      overridden virtual function is here
+  245 |         virtual shared_ptr<ItemInstance> getArmor(int pos) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:161:15: warning: 
+      'setEquippedSlot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  161 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:246:15: note: 
+      overridden virtual function is here
+  246 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item) = 0;
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:162:28: warning: 
+      'getEquipmentSlots' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  162 |         virtual ItemInstanceArray getEquipmentSlots();
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:249:28: note: 
+      overridden virtual function is here
+  249 |         virtual ItemInstanceArray getEquipmentSlots() = 0;
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:165:15: warning: 
+      'dropEquipment' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  165 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:189:15: note: 
+      overridden virtual function is here
+  189 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:187:18: warning: 
+      'getAName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  187 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:395:18: note: 
+      overridden virtual function is here
+  395 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:189:15: warning: 
+      'setCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  189 |         virtual void setCustomName(const wstring &name);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:466:14: note: 
+      overridden virtual function is here
+  466 | virtual void setCustomName(const wstring& name);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:190:18: warning: 
+      'getCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  190 |         virtual wstring getCustomName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:465:17: note: 
+      overridden virtual function is here
+  465 | virtual wstring getCustomName();
+      |                 ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:191:15: warning: 
+      'hasCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  191 |         virtual bool hasCustomName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:464:14: note: 
+      overridden virtual function is here
+  464 | virtual bool hasCustomName();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:192:15: warning: 
+      'setCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  192 |         virtual void setCustomNameVisible(bool visible);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:468:14: note: 
+      overridden virtual function is here
+  468 | virtual void setCustomNameVisible(bool visible);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:193:15: warning: 
+      'isCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  193 |         virtual bool isCustomNameVisible();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:467:14: note: 
+      overridden virtual function is here
+  467 | virtual bool isCustomNameVisible();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:194:15: warning: 
+      'shouldShowName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  194 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:265:15: note: 
+      overridden virtual function is here
+  265 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:199:15: warning: 
+      'interact' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  199 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:333:15: note: 
+      overridden virtual function is here
+  333 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:223:15: warning: 
+      'shouldRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  223 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:300:15: note: 
+      overridden virtual function is here
+  300 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:229:15: warning: 
+      'setLevel' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  229 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:278:15: note: 
+      overridden virtual function is here
+  278 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:10:9: warning: 
+      'LEVEL_MAX_WIDTH' macro redefined [-Wmacro-redefined]
+   10 | #define LEVEL_MAX_WIDTH (5*64) //(6*54)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:850:11: note: 
+      previous definition is here
+  850 | #  define LEVEL_MAX_WIDTH       1024
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:12:9: warning: 
+      'LEVEL_WIDTH_CLASSIC' macro redefined [-Wmacro-redefined]
+   12 | #define LEVEL_WIDTH_CLASSIC 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:847:11: note: 
+      previous definition is here
+  847 | #  define LEVEL_WIDTH_CLASSIC   256
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:13:9: warning: 
+      'LEVEL_WIDTH_SMALL' macro redefined [-Wmacro-redefined]
+   13 | #define LEVEL_WIDTH_SMALL 64
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+43 warnings generated.
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:700:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Windows64/Xbox_BuildVer.h:45:9: warning: 
+      'VER_FILEVERSION_STR_W' macro redefined [-Wmacro-redefined]
+   45 | #define VER_FILEVERSION_STR_W     VER_FILEVERSION_STR1_W(VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:992:11: note: 
+      previous definition is here
+  992 | #  define VER_FILEVERSION_STR_W L"0.0.1"
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:4:9: warning: 
+      LevelGenerationOptions.h [-W#pragma-messages]
+    4 | #pragma message("LevelGenerationOptions.h ")
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:29:14: warning: 
+      'GetType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   29 |         eINSTANCEOF GetType()                                           { return eTYPE_MOB;}
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:28:14: note: 
+      overridden virtual function is here
+   28 |         eINSTANCEOF GetType() { return eTYPE_LIVINGENTITY; }
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:81:7: warning: 
+      'registerAttributes' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   81 |         void registerAttributes();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:133:15: note: 
+      overridden virtual function is here
+  133 |         virtual void registerAttributes();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:95:15: warning: 
+      'defineSynchedData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   95 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:132:15: note: 
+      overridden virtual function is here
+  132 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:100:15: warning: 
+      'baseTick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  100 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:138:15: note: 
+      overridden virtual function is here
+  138 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:103:14: warning: 
+      'getExperienceReward' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  103 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:144:14: note: 
+      overridden virtual function is here
+  144 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:107:15: warning: 
+      'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  107 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:283:15: note: 
+      overridden virtual function is here
+  283 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:110:16: warning: 
+      'tickHeadTurn' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  110 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:286:16: note: 
+      overridden virtual function is here
+  286 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:113:15: warning: 
+      'dropDeathLoot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  113 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:201:15: note: 
+      overridden virtual function is here
+  201 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:116:15: warning: 
+      'addAdditonalSaveData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  116 |         virtual void addAdditonalSaveData(CompoundTag *entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:156:15: note: 
+      overridden virtual function is here
+  156 |         virtual void addAdditonalSaveData(CompoundTag* entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:117:15: warning: 
+      'readAdditionalSaveData' overrides a member function but is not marked 'override'
+      [-Winconsistent-missing-override]
+  117 |         virtual void readAdditionalSaveData(CompoundTag *tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:157:15: note: 
+      overridden virtual function is here
+  157 |         virtual void readAdditionalSaveData(CompoundTag* tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:124:15: warning: 
+      'setSpeed' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  124 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:280:15: note: 
+      overridden virtual function is here
+  280 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:125:15: warning: 
+      'aiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  125 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:289:15: note: 
+      overridden virtual function is here
+  289 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:128:15: warning: 
+      'useNewAi' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  128 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:276:15: note: 
+      overridden virtual function is here
+  276 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:138:15: warning: 
+      'newServerAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  138 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:292:15: note: 
+      overridden virtual function is here
+  292 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:139:15: warning: 
+      'serverAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  139 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:302:15: note: 
+      overridden virtual function is here
+  302 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:157:14: warning: 
+      'getMaxFallDistance' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  157 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:438:14: note: 
+      overridden virtual function is here
+  438 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:159:35: warning: 
+      'getCarried' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  159 |         virtual shared_ptr<ItemInstance> getCarried(int slot);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:244:35: note: 
+      overridden virtual function is here
+  244 |         virtual shared_ptr<ItemInstance> getCarried(int slot) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:160:35: warning: 
+      'getArmor' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  160 |         virtual shared_ptr<ItemInstance> getArmor(int pos);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:245:35: note: 
+      overridden virtual function is here
+  245 |         virtual shared_ptr<ItemInstance> getArmor(int pos) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:161:15: warning: 
+      'setEquippedSlot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  161 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:246:15: note: 
+      overridden virtual function is here
+  246 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item) = 0;
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:162:28: warning: 
+      'getEquipmentSlots' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  162 |         virtual ItemInstanceArray getEquipmentSlots();
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:249:28: note: 
+      overridden virtual function is here
+  249 |         virtual ItemInstanceArray getEquipmentSlots() = 0;
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:165:15: warning: 
+      'dropEquipment' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  165 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:189:15: note: 
+      overridden virtual function is here
+  189 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:187:18: warning: 
+      'getAName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  187 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:395:18: note: 
+      overridden virtual function is here
+  395 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:189:15: warning: 
+      'setCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  189 |         virtual void setCustomName(const wstring &name);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:466:14: note: 
+      overridden virtual function is here
+  466 | virtual void setCustomName(const wstring& name);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:190:18: warning: 
+      'getCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  190 |         virtual wstring getCustomName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:465:17: note: 
+      overridden virtual function is here
+  465 | virtual wstring getCustomName();
+      |                 ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:191:15: warning: 
+      'hasCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  191 |         virtual bool hasCustomName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:464:14: note: 
+      overridden virtual function is here
+  464 | virtual bool hasCustomName();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:192:15: warning: 
+      'setCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  192 |         virtual void setCustomNameVisible(bool visible);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:468:14: note: 
+      overridden virtual function is here
+  468 | virtual void setCustomNameVisible(bool visible);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:193:15: warning: 
+      'isCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  193 |         virtual bool isCustomNameVisible();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:467:14: note: 
+      overridden virtual function is here
+  467 | virtual bool isCustomNameVisible();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:194:15: warning: 
+      'shouldShowName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  194 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:265:15: note: 
+      overridden virtual function is here
+  265 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:199:15: warning: 
+      'interact' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  199 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:333:15: note: 
+      overridden virtual function is here
+  333 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:223:15: warning: 
+      'shouldRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  223 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:300:15: note: 
+      overridden virtual function is here
+  300 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:229:15: warning: 
+      'setLevel' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  229 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:278:15: note: 
+      overridden virtual function is here
+  278 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:10:9: warning: 
+      'LEVEL_MAX_WIDTH' macro redefined [-Wmacro-redefined]
+   10 | #define LEVEL_MAX_WIDTH (5*64) //(6*54)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:850:11: note: 
+      previous definition is here
+  850 | #  define LEVEL_MAX_WIDTH       1024
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:12:9: warning: 
+      'LEVEL_WIDTH_CLASSIC' macro redefined [-Wmacro-redefined]
+   12 | #define LEVEL_WIDTH_CLASSIC 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:847:11: note: 
+      previous definition is here
+  847 | #  define LEVEL_WIDTH_CLASSIC   256
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:13:9: warning: 
+      'LEVEL_WIDTH_SMALL' macro redefined [-Wmacro-redefined]
+   13 | #define LEVEL_WIDTH_SMALL 64
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+43 warnings generated.
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:700:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Windows64/Xbox_BuildVer.h:45:9: warning: 
+      'VER_FILEVERSION_STR_W' macro redefined [-Wmacro-redefined]
+   45 | #define VER_FILEVERSION_STR_W     VER_FILEVERSION_STR1_W(VER_PRODUCTBUILD, VER_PRODUCTBUILD_QFE)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:992:11: note: 
+      previous definition is here
+  992 | #  define VER_FILEVERSION_STR_W L"0.0.1"
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:4:9: warning: 
+      LevelGenerationOptions.h [-W#pragma-messages]
+    4 | #pragma message("LevelGenerationOptions.h ")
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:29:14: warning: 
+      'GetType' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   29 |         eINSTANCEOF GetType()                                           { return eTYPE_MOB;}
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:28:14: note: 
+      overridden virtual function is here
+   28 |         eINSTANCEOF GetType() { return eTYPE_LIVINGENTITY; }
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:81:7: warning: 
+      'registerAttributes' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   81 |         void registerAttributes();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:133:15: note: 
+      overridden virtual function is here
+  133 |         virtual void registerAttributes();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:95:15: warning: 
+      'defineSynchedData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+   95 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:132:15: note: 
+      overridden virtual function is here
+  132 |         virtual void defineSynchedData();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:100:15: warning: 
+      'baseTick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  100 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:138:15: note: 
+      overridden virtual function is here
+  138 |         virtual void baseTick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:103:14: warning: 
+      'getExperienceReward' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  103 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:144:14: note: 
+      overridden virtual function is here
+  144 |         virtual int getExperienceReward(shared_ptr<Player> killedBy);
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:107:15: warning: 
+      'tick' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  107 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:283:15: note: 
+      overridden virtual function is here
+  283 |         virtual void tick();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:110:16: warning: 
+      'tickHeadTurn' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  110 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:286:16: note: 
+      overridden virtual function is here
+  286 |         virtual float tickHeadTurn(float yBodyRotT, float walkSpeed);
+      |                       ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:113:15: warning: 
+      'dropDeathLoot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  113 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:201:15: note: 
+      overridden virtual function is here
+  201 |         virtual void dropDeathLoot(bool wasKilledByPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:116:15: warning: 
+      'addAdditonalSaveData' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  116 |         virtual void addAdditonalSaveData(CompoundTag *entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:156:15: note: 
+      overridden virtual function is here
+  156 |         virtual void addAdditonalSaveData(CompoundTag* entityTag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:117:15: warning: 
+      'readAdditionalSaveData' overrides a member function but is not marked 'override'
+      [-Winconsistent-missing-override]
+  117 |         virtual void readAdditionalSaveData(CompoundTag *tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:157:15: note: 
+      overridden virtual function is here
+  157 |         virtual void readAdditionalSaveData(CompoundTag* tag);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:124:15: warning: 
+      'setSpeed' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  124 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:280:15: note: 
+      overridden virtual function is here
+  280 |         virtual void setSpeed(float speed);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:125:15: warning: 
+      'aiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  125 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:289:15: note: 
+      overridden virtual function is here
+  289 |         virtual void aiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:128:15: warning: 
+      'useNewAi' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  128 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:276:15: note: 
+      overridden virtual function is here
+  276 |         virtual bool useNewAi();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:138:15: warning: 
+      'newServerAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  138 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:292:15: note: 
+      overridden virtual function is here
+  292 |         virtual void newServerAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:139:15: warning: 
+      'serverAiStep' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  139 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:302:15: note: 
+      overridden virtual function is here
+  302 |         virtual void serverAiStep();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:157:14: warning: 
+      'getMaxFallDistance' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  157 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:438:14: note: 
+      overridden virtual function is here
+  438 |         virtual int getMaxFallDistance();
+      |                     ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:159:35: warning: 
+      'getCarried' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  159 |         virtual shared_ptr<ItemInstance> getCarried(int slot);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:244:35: note: 
+      overridden virtual function is here
+  244 |         virtual shared_ptr<ItemInstance> getCarried(int slot) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:160:35: warning: 
+      'getArmor' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  160 |         virtual shared_ptr<ItemInstance> getArmor(int pos);
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:245:35: note: 
+      overridden virtual function is here
+  245 |         virtual shared_ptr<ItemInstance> getArmor(int pos) = 0;
+      |                                          ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:161:15: warning: 
+      'setEquippedSlot' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  161 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:246:15: note: 
+      overridden virtual function is here
+  246 |         virtual void setEquippedSlot(int slot, shared_ptr<ItemInstance> item) = 0;
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:162:28: warning: 
+      'getEquipmentSlots' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  162 |         virtual ItemInstanceArray getEquipmentSlots();
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:249:28: note: 
+      overridden virtual function is here
+  249 |         virtual ItemInstanceArray getEquipmentSlots() = 0;
+      |                                   ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:165:15: warning: 
+      'dropEquipment' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  165 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:189:15: note: 
+      overridden virtual function is here
+  189 |         virtual void dropEquipment(bool byPlayer, int playerBonusLevel);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:187:18: warning: 
+      'getAName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  187 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:395:18: note: 
+      overridden virtual function is here
+  395 |         virtual wstring getAName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:189:15: warning: 
+      'setCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  189 |         virtual void setCustomName(const wstring &name);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:466:14: note: 
+      overridden virtual function is here
+  466 | virtual void setCustomName(const wstring& name);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:190:18: warning: 
+      'getCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  190 |         virtual wstring getCustomName();
+      |                         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:465:17: note: 
+      overridden virtual function is here
+  465 | virtual wstring getCustomName();
+      |                 ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:191:15: warning: 
+      'hasCustomName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  191 |         virtual bool hasCustomName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:464:14: note: 
+      overridden virtual function is here
+  464 | virtual bool hasCustomName();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:192:15: warning: 
+      'setCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  192 |         virtual void setCustomNameVisible(bool visible);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:468:14: note: 
+      overridden virtual function is here
+  468 | virtual void setCustomNameVisible(bool visible);
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:193:15: warning: 
+      'isCustomNameVisible' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  193 |         virtual bool isCustomNameVisible();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:467:14: note: 
+      overridden virtual function is here
+  467 | virtual bool isCustomNameVisible();
+      |              ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:194:15: warning: 
+      'shouldShowName' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  194 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LivingEntity.h:265:15: note: 
+      overridden virtual function is here
+  265 |         virtual bool shouldShowName();
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:199:15: warning: 
+      'interact' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  199 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:333:15: note: 
+      overridden virtual function is here
+  333 |         virtual bool interact(shared_ptr<Player> player);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:223:15: warning: 
+      'shouldRender' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  223 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:300:15: note: 
+      overridden virtual function is here
+  300 |         virtual bool shouldRender(Vec3 *c);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:3:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Biome.h:5:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/Mob.h:229:15: warning: 
+      'setLevel' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+  229 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:721:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/DLCSkinFile.h:4:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/DLC/../../../Minecraft.World/Entity.h:278:15: note: 
+      overridden virtual function is here
+  278 |         virtual void setLevel(Level *level);
+      |                      ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:10:9: warning: 
+      'LEVEL_MAX_WIDTH' macro redefined [-Wmacro-redefined]
+   10 | #define LEVEL_MAX_WIDTH (5*64) //(6*54)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:850:11: note: 
+      previous definition is here
+  850 | #  define LEVEL_MAX_WIDTH       1024
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:12:9: warning: 
+      'LEVEL_WIDTH_CLASSIC' macro redefined [-Wmacro-redefined]
+   12 | #define LEVEL_WIDTH_CLASSIC 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:847:11: note: 
+      previous definition is here
+  847 | #  define LEVEL_WIDTH_CLASSIC   256
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:13:9: warning: 
+      'LEVEL_WIDTH_SMALL' macro redefined [-Wmacro-redefined]
+   13 | #define LEVEL_WIDTH_SMALL 64
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:864:11: note: 
+      previous definition is here
+  864 | #  define LEVEL_WIDTH_SMALL     384
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:14:9: warning: 
+      'LEVEL_WIDTH_MEDIUM' macro redefined [-Wmacro-redefined]
+   14 | #define LEVEL_WIDTH_MEDIUM (3*64)
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:867:11: note: 
+      previous definition is here
+  867 | #  define LEVEL_WIDTH_MEDIUM    640
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:20:9: warning: 
+      'LEVEL_MIN_WIDTH' macro redefined [-Wmacro-redefined]
+   20 | #define LEVEL_MIN_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:870:11: note: 
+      previous definition is here
+  870 | #  define LEVEL_MIN_WIDTH       128
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:21:9: warning: 
+      'LEVEL_LEGACY_WIDTH' macro redefined [-Wmacro-redefined]
+   21 | #define LEVEL_LEGACY_WIDTH 54
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:844:11: note: 
+      previous definition is here
+  844 | #  define LEVEL_LEGACY_WIDTH    864
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:28:9: warning: 
+      'HELL_LEVEL_MAX_SCALE' macro redefined [-Wmacro-redefined]
+   28 | #define HELL_LEVEL_MAX_SCALE 8
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:875:11: note: 
+      previous definition is here
+  875 | #  define HELL_LEVEL_MAX_SCALE  4
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1011:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/LevelGenerationOptions.h:7:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/StructureFeature.h:2:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/LargeFeature.h:2:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.World/../Minecraft.Client/Common/GameRules/../../../Minecraft.World/ChunkSource.h:38:9: warning: 
+      'HELL_LEVEL_MIN_SCALE' macro redefined [-Wmacro-redefined]
+   38 | #define HELL_LEVEL_MIN_SCALE 3
+      |         ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:858:11: note: 
+      previous definition is here
+  858 | #  define HELL_LEVEL_MIN_SCALE   1
+      |           ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:1016:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:703:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  703 | inline McleAppStub app;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_app_stub.h:749:1: warning: 
+      inline variables are a C++17 extension [-Wc++17-extensions]
+  749 | inline McleNetworkManagerStub g_NetworkManager;
+      | ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:71:2: error: 
+      no matching function for call to 'memcpy'
+   71 |         memcpy(buff->_getDataPointer(),RenderManager.MatrixGet(type),64);
+      |         ^~~~~~
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:16:
+In file included from /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk/usr/include/c++/v1/string.h:64:
+In file included from /Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk/usr/include/string.h:58:
+/Applications/Xcode-beta.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS27.0.sdk/usr/include/_string.h:78:3: note: 
+      candidate function not viable: cannot convert argument of incomplete type 'void' to 'const void *' for 2nd
+      argument
+   78 |                 memcpy(void *_LIBC_SIZE(__n) __dst, const void *_LIBC_SIZE(__n) __src,
+      |                 ^                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:100:31: error: 
+      too few arguments to function call, expected 2, have 1
+  100 |         RenderManager.CBuffCall(index);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~      ^
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:483:28: note: 
+      'CBuffCall' declared here
+  483 | inline bool C4JRenderStub::CBuffCall(int list, bool /*first*/) {
+      |                            ^         ~~~~~~~~~~~~~~
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:107:37: error: 
+      too few arguments to function call, expected 2, have 1
+  107 |                 RenderManager.CBuffCall(ib->get(i));
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~           ^
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:483:28: note: 
+      'CBuffCall' declared here
+  483 | inline bool C4JRenderStub::CBuffCall(int list, bool /*first*/) {
+      |                            ^         ~~~~~~~~~~~~~~
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:131:15: error: 
+      redefinition of 'update'
+  131 | void Display::update()
+      |               ^
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:936:17: note: 
+      previous definition is here
+  936 |     static void update()                 {}
+      |                 ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:135:15: error: 
+      redefinition of 'swapBuffers'
+  135 | void Display::swapBuffers()
+      |               ^
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:937:17: note: 
+      previous definition is here
+  937 |     static void swapBuffers()            {}
+      |                 ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:146:16: error: 
+      no matching member function for call to 'TextureData'
+  146 |         RenderManager.TextureData(width,height,data->getBuffer(),level);
+      |         ~~~~~~~~~~~~~~^~~~~~~~~~~
+In file included from <built-in>:1:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:383:10: note: 
+      candidate function not viable: requires 5 arguments, but 4 were provided
+  383 |     void TextureData(int width, int height, void *pixels, int mipLevel, int /*format*/) {
+      |          ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:391:12: note: 
+      candidate function template not viable: requires at least 6 arguments, but 4 were provided
+  391 |     void   TextureData(A1, A2, A3, A4, A5, A6, Rest...) {}
+      |            ^           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:153:17: error: 
+      no member named 'TextureFree' in 'C4JRenderStub'
+  153 |                 RenderManager.TextureFree(ib->get(i));
+      |                 ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:160:16: error: 
+      no member named 'TextureFree' in 'C4JRenderStub'
+  160 |         RenderManager.TextureFree(id);
+      |         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:167:25: error: 
+      no member named 'TextureCreate' in 'C4JRenderStub'
+  167 |                 ib->put(RenderManager.TextureCreate());
+      |                         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:172:5: error: 
+      functions that differ only in their return type cannot be overloaded
+  172 | int glGenTextures()
+      | ~~~ ^
+In file included from <built-in>:1:
+In file included from /Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_stdafx.h:21:
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/Minecraft.Client/iOS/iOS_WinCompat.h:831:14: note: 
+      previous declaration is here
+  831 | unsigned int glGenTextures(void);                                        // MemoryTracker
+      | ~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:174:23: error: 
+      no member named 'TextureCreate' in 'C4JRenderStub'
+  174 |         return RenderManager.TextureCreate();
+      |                ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:179:16: error: 
+      no member named 'StateSetColour' in 'C4JRenderStub'
+  179 |         RenderManager.StateSetColour(r,g,b,1.0f);
+      |         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:184:16: error: 
+      no member named 'StateSetColour' in 'C4JRenderStub'
+  184 |         RenderManager.StateSetColour(r,g,b,a);
+      |         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:195:18: error: 
+      no member named 'StateSetBlendEnable' in 'C4JRenderStub'
+  195 |                         RenderManager.StateSetBlendEnable(false);
+      |                         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:198:18: error: 
+      no member named 'StateSetFaceCull' in 'C4JRenderStub'
+  198 |                         RenderManager.StateSetFaceCull(false);
+      |                         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:201:18: error: 
+      no member named 'StateSetDepthTestEnable' in 'C4JRenderStub'
+  201 |                         RenderManager.StateSetDepthTestEnable(false);
+      |                         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:204:18: error: 
+      no member named 'StateSetAlphaTestEnable' in 'C4JRenderStub'
+  204 |                         RenderManager.StateSetAlphaTestEnable(false);
+      |                         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:207:18: error: 
+      no member named 'StateSetFogEnable' in 'C4JRenderStub'
+  207 |                         RenderManager.StateSetFogEnable(false);
+      |                         ~~~~~~~~~~~~~ ^
+/Users/rhyswilliams/Downloads/MCLCE-iOS-neolegacy-port-v10/upstream/Minecraft.Client/glWrapper.cpp:210:18: error: 
+      no member named 'StateSetLightingEnable' in 'C4JRenderStub'
+  210 |                         RenderManager.StateSetLightingEnable(false);
+      |                         ~~~~~~~~~~~~~ ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+43 warnings and 20 errors generated.
+note: Run script build phase 'Generate CMakeFiles/ZERO_CHECK' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ZERO_CHECK' from project 'MCLE_iOS')
+note: Run script build phase 'Generate CMakeFiles/ALL_BUILD' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ALL_BUILD' from project 'MCLE_iOS')
+** BUILD FAILED **
+
+
+ERROR: command failed: cmake --build build --config Release -- -quiet
+rhyswilliams@Rhyss-MacBook MCLCE-iOS-neolegacy-port-v10 % 
